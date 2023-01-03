@@ -1,0 +1,8 @@
+per caricare
+git add .
+git commit -m "commento"
+git push
+
+per non caricare
+git stash
+git push
