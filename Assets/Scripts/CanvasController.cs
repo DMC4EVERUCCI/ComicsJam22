@@ -58,8 +58,8 @@ public class CanvasController : MonoBehaviour
     {
         NameBox = GameObject.Find("NameBox").GetComponent<TextMeshProUGUI>();
         Dialogue = GameObject.Find("DiagText").GetComponent<TextMeshProUGUI>();
-        Choice1 = GameObject.Find("Choice1").GetComponent<TextMeshProUGUI>();
-        Choice2 = GameObject.Find("Choice2").GetComponent<TextMeshProUGUI>();
+        Choice1 = GameObject.Find("Choice1").GetComponentInChildren<TextMeshProUGUI>();
+        Choice2 = GameObject.Find("Choice2").GetComponentInChildren<TextMeshProUGUI>();
 
         TimeManager = GameObject.Find("Time Manager");
         LevelManager = GameObject.Find("LevelManager");
@@ -206,6 +206,12 @@ public class CanvasController : MonoBehaviour
         {
             case SingleTextBox.Name:
                 NameBox.text = text;
+                break;
+            case SingleTextBox.Choice1:
+                Choice1.text = text;
+                break;
+            case SingleTextBox.Choice2:
+                Choice2.text = text;
                 break;
             case SingleTextBox.DialogueBox:
                 Dialogue.text = "\"" + text + "\"";

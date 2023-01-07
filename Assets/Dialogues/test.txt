@@ -9,10 +9,22 @@ introtext = ["hello new world","all the boys and girls","ive got some true stori
 choicetext = "test choice 1"
 choicediag = ["you're back outside","but they still lied"]
 
+
+[choice11]
+
+choicetext = "test choice 11"
+choicediag = ["woooo ooo oooo oh","yea"]
+
+[choice12]
+
+choicetext = "test choice 12"
+choicediag = ["STOP THE PRESSES!"]
+
 [choice2]
 
 choicetext = "test choice 2"
-choicediag = ["woooo ooo oooo oh","yea"]
+choicediag = ["UH UH UH"]
+
 
 
 

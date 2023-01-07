@@ -19,6 +19,9 @@ public class LevelManager : MonoBehaviour
     public bool actionInProgress = false;
     public int pressedButton = 0;
 
+    bool Choice1Done;
+    bool Choice2Done;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,25 +84,78 @@ public class LevelManager : MonoBehaviour
         while (true)
         {
 
-            if (pressedButton == 1)
-            {
-                List<string> choice1diag = getStringList(levelTable["choice1"]["choicediag"].AsArray);
-                yield return StartCoroutine(canvas.printDialogue(choice1diag, MultiBoxes.DialogueBox));
+            if (!Choice1Done)
+			{
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
 
-                pressedButton = 0;
-                canvas.HideChoices();
-                canvas.EndDialogue();
+                    Choice1Done = true;
+                    List<string> choice1diag = getStringList(levelTable["choice1"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(choice1diag, MultiBoxes.DialogueBox));
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["choice11"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice12"]["choicetext"].ToString(), Boxes.Choice2);
+
+                    pressedButton = 0;
+
+                }
+
+                if (pressedButton == 2)
+                {
+                    canvas.HideChoices();
+
+                    Choice2Done = true;
+                    List<string> choice2diag = getStringList(levelTable["choice2"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(choice2diag, MultiBoxes.DialogueBox));
+
+                    pressedButton = 0;
+                    canvas.HideChoices();
+
+                    actionInProgress = false;
+                    canvas.EndDialogue();
+                }
             }
 
-            if (pressedButton == 2)
-            {
-                List<string> choice2diag = getStringList(levelTable["choice2"]["choicediag"].AsArray);
-                yield return StartCoroutine(canvas.printDialogue(choice2diag, MultiBoxes.DialogueBox));
+            if (Choice1Done)
+			{
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
 
-                pressedButton = 0;
-                canvas.HideChoices();
-                canvas.EndDialogue();
+                    List<string> choice11diag = getStringList(levelTable["choice11"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(choice11diag, MultiBoxes.DialogueBox));
+
+                    Choice1Done = false;
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext"].ToString(), Boxes.Choice2);
+
+                    pressedButton = 0;
+
+                }
+
+                if (pressedButton == 2)
+                {
+                    canvas.HideChoices();
+
+                    List<string> choice12diag = getStringList(levelTable["choice12"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(choice12diag, MultiBoxes.DialogueBox));
+
+                    Choice1Done = false;
+                    pressedButton = 0;
+                    canvas.HideChoices();
+
+                    actionInProgress = false;
+                    canvas.EndDialogue();
+                }
             }
+
+            
+
+            
+
 
             // If a normal action was pressed
             //if (pressedButton > 0 && pressedButton <= 3)
@@ -164,7 +220,6 @@ public class LevelManager : MonoBehaviour
             //    break;
             //}
 
-            actionInProgress = false;
 
             // Reactivate player outline & deactivate enemy outline
             //pressedButton = 0;
