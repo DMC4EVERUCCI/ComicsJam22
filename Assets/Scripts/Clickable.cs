@@ -6,16 +6,14 @@ using UnityEngine.Events;
 public class Clickable : MonoBehaviour
 {
 
-    GameObject Function1;
-    GameObject Function2;
-    GameObject Function3;
+    LevelManager LevelManager;
 
     public UnityEvent OtherFunctions;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        LevelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
@@ -27,7 +25,10 @@ public class Clickable : MonoBehaviour
     void OnMouseDown()
     {
         print("Calling!");
-        CallOtherFunctions();
+        if (LevelManager.actionInProgress == false)
+		{
+            CallOtherFunctions();
+        }
     }
 
     void CallOtherFunctions()

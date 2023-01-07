@@ -1,0 +1,18 @@
+name = "TESTNAME"
+
+[intro]
+
+introtext = ["hello new world","all the boys and girls","ive got some true stories to tell"]
+
+[choice1]
+
+choicetext = "test choice 1"
+choicediag = ["you're back outside","but they still lied"]
+
+[choice2]
+
+choicetext = "test choice 2"
+choicediag = ["woooo ooo oooo oh","yea"]
+
+
+
