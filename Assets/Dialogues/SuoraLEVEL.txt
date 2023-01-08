@@ -6,7 +6,9 @@ name = "Nives" #NOME PG
 
 [introUNAVAIL]
 
-introtext = ["UNAVAILABLE"] #Dialogo se non è disponibile
+introtext = ["*I should check back at a later time*"] #Dialogo se non è disponibile
+introtextlose = ["*Seems like Nives doesn't want to talk with me anymore*"]
+introtextwin = ["*Seems like Nives is preparing to go to the festival*"]
 
 [introFirst]
 
@@ -41,8 +43,9 @@ choicediagnew = ["Sure!"]
 
 [choice3] #ITEM OP
 
-choicetext = "LETTER"
-choicediag = ["*Should i show her the letter?"]
+choicetext = "LOCKED"
+choicetextyes = "Should i show her the letter...?"
+choicediag = ["Something to ask?"]
 
 [choice4] #Esci dalla conversazione
 
@@ -146,7 +149,7 @@ choicediag2 = ["Ahh", "Well yes, God is infinitely kind."] #felice
 
 [ITEM1] #Esci dalla conversazione
 
-choicetext = "Bye."
+choicetext = "Uhh... it's nothing, sorry."
 choicediag = ["God bless you."]
 
 [ITEM2] #PROVA 1
@@ -157,17 +160,19 @@ choicediag = ["Yes, hand me that pen over there.", "There God bless you", "*The 
 [ITEM3] #PROVA 2
 
 choicetext = "Have you ever thought of killing anybody?"
-choicediag = ["What an odd question, no, i never had that tough."] #preoccupata
-choicetext2 = "If God will ever ask you to kill someone, what will you do?"
-choicediag2 = ["What, I....I...", "Can we talk about something else please?"] #preoccupata
+choicediag = ["What an odd question. No, i never had that tought."] #preoccupata
+#MenuItem3
+choicetext2 = "If God was ever to ask you to kill someone, what would you do?"
+choicediag2 = ["What? I....I...", "...Can we talk about something else please?"] #preoccupata
 
 [ITEM4] #WIN OR LOSE??
 
 choicetext = "I found a letter, and i think you wrote it"
-choicediagA = ["What you're saying is built from nothing.", "Please go away now."] #PERDI #preoccupata
-choicediagB = [" I could talk about the letter at the guards outside here…"] #VINCI
-choicetextB2 = "I just want you to come to the festival."
-choicediagB2 = "I...I'll come." #preoccupata
+choicediagA = ["What you're saying is built from nothing.", "Please, go away now. We have nothing to speak of anymore."] #PERDI #preoccupata
+choicediagB = ["And...? What about it?"] #VINCI
+#MenuItem4
+choicetextB2 = "I could talk about the letter at the guards outside here… Unless you come to the festival."
+choicediagB2 = ["Alright! You win. I... I'll come."] #preoccupata
 
 
 

@@ -23,6 +23,12 @@ public class LevelManager : MonoBehaviour
 
     // bools firsttime
     bool firstTime1 = true;
+    //bools win/lose
+    //PG1
+    public bool PG1win;
+    public bool PG1lost;
+    bool PG1prova1;
+    bool PG1prova2;
 
     // Menus PG1
     bool mainmenu = true;
@@ -37,6 +43,9 @@ public class LevelManager : MonoBehaviour
     bool BSTMenu3B;
     bool BSTMenu4;
     bool BSTMenu4B;
+    bool ItemMenu;
+    bool ItemMenu3;
+    bool ItemMenu4;
 
     // SpigaCheck PG1
     bool SpigaTimeFestaPG1; //neg
@@ -139,7 +148,23 @@ public class LevelManager : MonoBehaviour
             choice2int = "new";
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+		{
+            ItemHandler(1);
+		}
+
     }
+
+    public void ItemHandler(int i)
+	{
+		switch (i)
+		{
+            case 1:
+                // mett in inventario
+                letterInt = "yes";
+                break;
+		}
+	}
 
     public void progressHindLock(int i)
 	{
@@ -244,6 +269,25 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
 
+        if (PG1lost)
+		{
+            List<string> introTextLOSE = getStringList(levelTable["introUNAVAIL"]["introtextlose"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introTextLOSE, MultiBoxes.DialogueBox));
+
+            actionInProgress = false;
+            canvas.EndDialogue();
+            yield return null;
+        }
+		if (PG1win)
+		{
+            List<string> introTextWIN = getStringList(levelTable["introUNAVAIL"]["introtextwin"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introTextWIN, MultiBoxes.DialogueBox));
+
+            actionInProgress = false;
+            canvas.EndDialogue();
+            yield return null;
+        }
+
 
         // Generate and print intro text
         if (firstTime1) // se è la prima volta
@@ -263,14 +307,14 @@ public class LevelManager : MonoBehaviour
         canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
         canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
         canvas.printToTextBox(levelTable["choice2"]["choicetext"+choice2int].ToString(), Boxes.Choice2);
-        canvas.printToTextBox(levelTable["choice3"+letterInt]["choicetext"].ToString(), Boxes.Choice3);
+        canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
         canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
         while (true)
         {
-            if (mainmenu == true)
+            if (mainmenu == true) // MAIN MENU
 			{
-                if (pressedButton == 1)
+                if (pressedButton == 1)  // INVITO FESTA
                 {
                     canvas.HideChoices();
 
@@ -286,7 +330,7 @@ public class LevelManager : MonoBehaviour
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -294,7 +338,7 @@ public class LevelManager : MonoBehaviour
                     pressedButton = 0;
                 }
 
-                if (pressedButton == 2)
+                if (pressedButton == 2) // BST
                 {
                     canvas.HideChoices();
 
@@ -314,32 +358,46 @@ public class LevelManager : MonoBehaviour
                     pressedButton = 0;
                 }
 
-                if (pressedButton == 3)
+                if (pressedButton == 3) //ITEM OP
 				{
                     canvas.HideChoices();
 
                     if (letterInt == "yes")
 					{
-                        print("gotcha");
-					}
+                        canvas.HideChoices();
+
+                        List<string> choice3diag = getStringList(levelTable["choice3"]["choicediag" + choice1int].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(choice3diag, MultiBoxes.DialogueBox));
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["ITEM1"]["choicetext"].ToString(), Boxes.Choice1);
+                        canvas.printToTextBox(levelTable["ITEM2"]["choicetext"].ToString(), Boxes.Choice2);
+                        canvas.printToTextBox(levelTable["ITEM3"]["choicetext"].ToString(), Boxes.Choice3);
+                        canvas.printToTextBox(levelTable["ITEM4"]["choicetext"].ToString(), Boxes.Choice4);
+
+                        ItemMenu = true;
+                        mainmenu = false;
+                        canvas.AllChoices();
+                        pressedButton = 0;
+                    }
 					else
 					{
-                        
-                    }
-                    //temp
-                    canvas.ShowChoices();
-                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
-                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
-                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
-                    canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                        canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
+                        canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
+                        canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
-                    mainmenu = true;
-                    canvas.AllChoices();
-                    pressedButton = 0;
+                        mainmenu = true;
+                        canvas.AllChoices();
+                        pressedButton = 0;
+                    }
+                    
                 }
 
-                if (pressedButton == 4)
+                if (pressedButton == 4) // ESC
 				{
                     canvas.HideChoices();
 
@@ -381,7 +439,7 @@ public class LevelManager : MonoBehaviour
                         canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                         canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                         canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                        canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                        canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                         canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                         mainmenu = true;
@@ -392,6 +450,9 @@ public class LevelManager : MonoBehaviour
 					if (BST1Phase == 2 && (PG1currentPhase1P1 != TimeScript.phaseNum || PG1currentDay1P1 != TimeScript.day))
 					{
 						canvas.HideChoices();
+
+                        // PG1 FELICE
+                        canvas.PG1Emoji(2);
 
                         List<string> BST1P2diag = getStringList(levelTable["BST1P2"]["choicediag"].AsArray);
                         yield return StartCoroutine(canvas.printDialogue(BST1P2diag, MultiBoxes.DialogueBox));
@@ -404,6 +465,9 @@ public class LevelManager : MonoBehaviour
                             BST1Phase1++;
                             BST1P2done = true;
                         }
+
+                        // PG1 NORMALE
+                        canvas.PG1Emoji(1);
 
                         canvas.ShowChoices();
 						canvas.printToTextBox(levelTable["intro"]["flavortextBST"].ToString(), Boxes.DialogueBox);
@@ -527,7 +591,7 @@ public class LevelManager : MonoBehaviour
                         canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                         canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                         canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                        canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                        canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                         canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                         mainmenu = true;
@@ -643,6 +707,9 @@ public class LevelManager : MonoBehaviour
                     {
                         canvas.HideChoices();
 
+                        // PG1 preoccupata
+                        canvas.PG1Emoji(3);
+
                         if (SpigaTimeBST4P2PG1 == false)
 						{
                             SpigaGauge(1);
@@ -650,6 +717,9 @@ public class LevelManager : MonoBehaviour
                         }
                         List<string> BST4P2diag = getStringList(levelTable["BST4P2"]["choicediag"].AsArray);
                         yield return StartCoroutine(canvas.printDialogue(BST4P2diag, MultiBoxes.DialogueBox));
+
+                        // PG1 normale
+                        canvas.PG1Emoji(1);
 
                         canvas.ShowChoices();
                         canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
@@ -679,7 +749,7 @@ public class LevelManager : MonoBehaviour
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -704,7 +774,7 @@ public class LevelManager : MonoBehaviour
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -729,7 +799,7 @@ public class LevelManager : MonoBehaviour
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -746,6 +816,9 @@ public class LevelManager : MonoBehaviour
                 {
                     canvas.HideChoices();
 
+                    // PG1 felice
+                    canvas.PG1Emoji(2);
+
                     if (SpigaTimeBST1P3APG1 == false)
                     {
                         SpigaGauge(-1);
@@ -754,13 +827,16 @@ public class LevelManager : MonoBehaviour
                     List<string> BST1P3diag2A = getStringList(levelTable["BST1P3"]["choicediag2A"].AsArray);
                     yield return StartCoroutine(canvas.printDialogue(BST1P3diag2A, MultiBoxes.DialogueBox));
 
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
+
                     choice1int = "new";
 
                     canvas.ShowChoices();
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -786,7 +862,7 @@ public class LevelManager : MonoBehaviour
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -800,6 +876,9 @@ public class LevelManager : MonoBehaviour
                 {
                     canvas.HideChoices();
 
+                    // PG1 felice
+                    canvas.PG1Emoji(2);
+
                     if (SpigaTimeBST1P3CPG1 == false)
                     {
                         SpigaGauge(1);
@@ -808,11 +887,14 @@ public class LevelManager : MonoBehaviour
                     List<string> BST1P3diag2C = getStringList(levelTable["BST1P3"]["choicediag2C"].AsArray);
                     yield return StartCoroutine(canvas.printDialogue(BST1P3diag2C, MultiBoxes.DialogueBox));
 
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
+
                     canvas.ShowChoices();
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -855,6 +937,9 @@ public class LevelManager : MonoBehaviour
                 {
                     canvas.HideChoices();
 
+                    // PG1 felice
+                    canvas.PG1Emoji(2);
+
                     if (SpigaTimeBST1P4APG1 == false)
 					{
                         SpigaGauge(-1);
@@ -864,11 +949,15 @@ public class LevelManager : MonoBehaviour
                     List<string> BST1P4diag2A = getStringList(levelTable["BST1P4"]["choicediag2A"].AsArray);
                     yield return StartCoroutine(canvas.printDialogue(BST1P4diag2A, MultiBoxes.DialogueBox));
 
+
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
+
                     canvas.ShowChoices();
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -884,6 +973,9 @@ public class LevelManager : MonoBehaviour
                 {
                     canvas.HideChoices();
 
+                    // PG1 felice
+                    canvas.PG1Emoji(2);
+
                     if (SpigaTimeBST1P4BPG1 == false)
                     {
                         SpigaGauge(-1);
@@ -893,11 +985,14 @@ public class LevelManager : MonoBehaviour
                     List<string> BST1P4diag2B = getStringList(levelTable["BST1P4"]["choicediag2B"].AsArray);
                     yield return StartCoroutine(canvas.printDialogue(BST1P4diag2B, MultiBoxes.DialogueBox));
 
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
+
                     canvas.ShowChoices();
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -913,6 +1008,9 @@ public class LevelManager : MonoBehaviour
                 {
                     canvas.HideChoices();
 
+                    // PG1 felice
+                    canvas.PG1Emoji(2);
+
                     if (SpigaTimeBST1P4CPG1 == false)
                     {
                         SpigaGauge(-3);
@@ -922,11 +1020,14 @@ public class LevelManager : MonoBehaviour
                     List<string> BST1P4diag2C = getStringList(levelTable["BST1P4"]["choicediag2C"].AsArray);
                     yield return StartCoroutine(canvas.printDialogue(BST1P4diag2C, MultiBoxes.DialogueBox));
 
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
+
                     canvas.ShowChoices();
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -952,7 +1053,7 @@ public class LevelManager : MonoBehaviour
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -969,14 +1070,20 @@ public class LevelManager : MonoBehaviour
                 {
                     canvas.HideChoices();
 
+                    // PG1 preoccupata
+                    canvas.PG1Emoji(3);
+
                     List<string> BST2P3diag2A = getStringList(levelTable["BST2P3"]["choicediag2A"].AsArray);
                     yield return StartCoroutine(canvas.printDialogue(BST2P3diag2A, MultiBoxes.DialogueBox));
+
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
 
                     canvas.ShowChoices();
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -991,14 +1098,20 @@ public class LevelManager : MonoBehaviour
                 {
                     canvas.HideChoices();
 
+                    // PG1 preoccupata
+                    canvas.PG1Emoji(3);
+
                     List<string> BST2P3diag2B = getStringList(levelTable["BST2P3"]["choicediag2B"].AsArray);
                     yield return StartCoroutine(canvas.printDialogue(BST2P3diag2B, MultiBoxes.DialogueBox));
+
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
 
                     canvas.ShowChoices();
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -1023,7 +1136,7 @@ public class LevelManager : MonoBehaviour
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -1040,14 +1153,20 @@ public class LevelManager : MonoBehaviour
                 {
                     canvas.HideChoices();
 
+                    // PG1 preoccupata
+                    canvas.PG1Emoji(3);
+
                     List<string> BST3P2diag = getStringList(levelTable["BST3P2"]["choicediag2"].AsArray);
                     yield return StartCoroutine(canvas.printDialogue(BST3P2diag, MultiBoxes.DialogueBox));
+
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
 
                     canvas.ShowChoices();
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -1072,7 +1191,7 @@ public class LevelManager : MonoBehaviour
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -1089,14 +1208,20 @@ public class LevelManager : MonoBehaviour
                 {
                     canvas.HideChoices();
 
+                    // PG1 felice
+                    canvas.PG1Emoji(2);
+
                     List<string> BST4P2diag = getStringList(levelTable["BST4P2"]["choicediag2"].AsArray);
                     yield return StartCoroutine(canvas.printDialogue(BST4P2diag, MultiBoxes.DialogueBox));
+
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
 
                     canvas.ShowChoices();
                     canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
                     canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
                     canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
-                    canvas.printToTextBox(levelTable["choice3" + letterInt]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
                     canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
 
                     mainmenu = true;
@@ -1108,7 +1233,176 @@ public class LevelManager : MonoBehaviour
                 }
             }
 
-            // ITEMmenu
+            if (ItemMenu == true)
+			{
+                if (pressedButton == 1) // ESC
+				{
+                    canvas.HideChoices();
+
+                    List<string> item1diag = getStringList(levelTable["ITEM1"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(item1diag, MultiBoxes.DialogueBox));
+
+                    pressedButton = 0;
+
+                    mainmenu = true;
+                    ItemMenu = false;
+                    canvas.AllChoices();
+                    actionInProgress = false;
+                    canvas.EndDialogue();
+                }
+
+                if (pressedButton == 2)
+				{
+                    canvas.HideChoices();
+
+                    // PG1 felice
+                    canvas.PG1Emoji(2);
+
+                    List<string> item2diag = getStringList(levelTable["ITEM2"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(item2diag, MultiBoxes.DialogueBox));
+
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["ITEM1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["ITEM2"]["choicetext"].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["ITEM3"]["choicetext"].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["ITEM4"]["choicetext"].ToString(), Boxes.Choice4);
+
+                    //prova1
+                    PG1prova1 = true;
+
+                    mainmenu = false;
+                    ItemMenu = true;
+                    canvas.AllChoices();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 3)
+                {
+                    canvas.HideChoices();
+
+                    // PG1 preoccupata
+                    canvas.PG1Emoji(3);
+
+                    List<string> item3diag = getStringList(levelTable["ITEM3"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(item3diag, MultiBoxes.DialogueBox));
+
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["ITEM3"]["choicetext2"].ToString(), Boxes.Choice1);
+
+                    //prova2
+                    PG1prova2 = true;
+
+                    mainmenu = false;
+                    ItemMenu = false;
+                    ItemMenu3 = true;
+                    canvas.Choices1();
+                    pressedButton = 0;
+                }
+                if (pressedButton == 4)
+                {
+                    canvas.HideChoices();
+
+                    if (PG1prova1 == true && PG1prova2 == true) // WIN
+					{
+                        // PG1 preoccupata
+                        canvas.PG1Emoji(3);
+
+                        List<string> item4diagB = getStringList(levelTable["ITEM4"]["choicediagB"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(item4diagB, MultiBoxes.DialogueBox));
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["ITEM4"]["choicetextB2"].ToString(), Boxes.Choice1);
+
+                        mainmenu = false;
+                        ItemMenu = false;
+                        ItemMenu3 = false;
+                        ItemMenu4 = true;
+                        canvas.Choices1();
+                        pressedButton = 0;
+                    }
+					else // LOSE
+                    {
+                        // PG1 preoccupata
+                        canvas.PG1Emoji(3);
+
+                        List<string> item4diagA = getStringList(levelTable["ITEM4"]["choicediagA"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(item4diagA, MultiBoxes.DialogueBox));
+
+                        // PG1 normale
+                        canvas.PG1Emoji(1);
+
+                        PG1lost = true;
+
+                        pressedButton = 0;
+
+                        mainmenu = true;
+                        ItemMenu = false;
+                        canvas.AllChoices();
+                        actionInProgress = false;
+                        canvas.EndDialogue();
+                    }
+
+                }
+            }
+
+            if (ItemMenu3 == true)
+			{
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
+
+                    List<string> item3diag2 = getStringList(levelTable["ITEM3"]["choicediag2"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(item3diag2, MultiBoxes.DialogueBox));
+
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + letterInt].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
+
+                    mainmenu = true;
+                    ItemMenu = false;
+                    ItemMenu3 = false;
+                    canvas.AllChoices();
+                    pressedButton = 0;
+                }
+            }
+
+            if (ItemMenu4 == true)
+			{
+                if (pressedButton == 1)
+				{
+                    canvas.HideChoices();
+
+                    List<string> item4diagB2 = getStringList(levelTable["ITEM4"]["choicediagB2"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(item4diagB2, MultiBoxes.DialogueBox));
+
+                    // PG1 normale
+                    canvas.PG1Emoji(1);
+
+                    PG1win = true;
+
+                    mainmenu = true;
+                    ItemMenu = false;
+                    ItemMenu3 = false;
+                    ItemMenu4 = false;
+                    canvas.AllChoices();
+                    actionInProgress = false;
+                    canvas.EndDialogue();
+                    pressedButton = 0;
+                }
+            }
 
             yield return null;
         }
