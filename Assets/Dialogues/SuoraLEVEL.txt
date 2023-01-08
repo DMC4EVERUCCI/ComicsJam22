@@ -28,28 +28,26 @@ flavortextEMPTY = "..."
 
 [choice1] #Invito alla festa
 
-choicetext = "Hey, there will be a festival in my village, do you want to join?"
+choicetext = "There will be a festival in my village, would you like to join?"
 choicediag = ["Thank you for the offer, but i'm busy"]
 choicediagnew = ["Yeah... sure... I would be honored to join!"]
 
 [choice2] #BACKSTORY
 
 choicetext = "I never saw your face here, who are you?"
-choicediag = ["Oh i'm new here but don't worry i'll leave in a few days.",
-"I was hungry and tired, i just wanted to find a place to rest.",
-"In a few days i'll become a nun, but the place i'm going to is far away from here."]
+choicediag = ["Oh i'm new here but don't worry i'll leave in a few days.","I was hungry and tired, i just wanted to find a place to rest.","In a few days i'll become a nun, but the place i'm going to is far away from here."]
 choicetextnew = "I'd like to know more about you"
 choicediagnew = ["Sure!"]
 
 [choice3] #ITEM OP
 
 choicetext = "LOCKED"
-choicetextyes = "Should i show her the letter...?"
+choicetextyes = "Should I show her the letter...?"
 choicediag = ["Something to ask?"]
 
 [choice4] #Esci dalla conversazione
 
-choicetext = "Back"
+choicetext = "Goodbye."
 choicediag = ["God bless you"]
 
 ##### DIRAMAZIONE BACKSTORY:

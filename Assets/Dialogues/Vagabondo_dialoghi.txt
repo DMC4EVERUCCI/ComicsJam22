@@ -1,0 +1,139 @@
+# Template
+
+name = "Bernardo & Bernardino" #NOME PG
+
+### INTRODUZIONE
+
+[introUNAVAIL]
+
+introtext = ["UNAVAILABLE"] #Dialogo se non è disponibile
+
+[introFirst]
+
+introtext = ["Hoy i'm Bernardino and there lies my dad", "Bernardo", "Searching for something?", "I can help you if you can pay"] #Intro Dialogo per la prima volta
+
+[intro]
+
+introtext = ["You again, got some money to give me?"] #Intro dialogo per tutte le altre volte
+
+flavortext = ["Wanna something?"] #text di default prima che chiedi
+
+flavortextBST = ["Wanna something?"] #text di default nel submenu della backstory
+
+### 4 SCELTE INIZIALI
+
+[choice1] #Invito alla festa
+
+choicetext = "Hey, there will be a festival in my village, do you want to join?"
+choicediag = ["You now man", "I would join, but my dad here", "He doesn't want me to leave", "And i mean he's not wrong y'know"]
+
+[choice2] #BACKSTORY
+
+choicetext = "I never saw you around, who are you?"
+choicediag = ["We'll leave in a few days.",
+"We needed a place to stay, 'cause y'now",
+"My dad's not so well"]
+
+[choice3] #ITEM OP
+
+choicetext = "Show the teeth of the saint"
+choicediag = ["Wooo is that a reliquia, i could make soo much money from that"]
+
+[choice4] #Esci dalla conversazione
+
+choicetext = "Back"
+choicediag = ["I'd like if you never come back"]
+
+##### DIRAMAZIONE BACKSTORY:
+#(LA PRIMA FASE E' SEMPRE CHILL)
+
+### ALBERO 1
+
+[BST1P1] #FILONE 1
+choicetext = "Do you believe in God?" 
+choicediag = ["I never had that strong fate y'know", "But my dad here", "He's really faithful",
+"He'd be a priest if he could", "But you now", "Marriage", "Since the story begins woman used to ruins men's life."]
+choicetext2A = "What do you think about pagans ceremonies?"
+choicediag2A = ["Shhh, don't talk about pagans here.", "He'll become mad"] #NEGATIVO
+choicetext2B = "You sould listen to your dad about God"
+choicediag2B = ["..."] #POSITIVO
+
+
+### ALBERO 2
+
+[BST2P1] #FILONE 1
+choicetext = "Why are you with your dad?" 
+choicediag = ["Like...", "Are you blind?", "He's ill he can't move", "Are you stupid or what?"]
+choicetext2A = "Why specifically you?"
+choicediag2A = ["There was nobody else."] #POSITIVO
+choicetext2B = "You don't seem... fitting for the task."
+choicediag2B = ["Go fuck yourself."] #NEGATIVO
+
+[BST2P2] #FILONE 2
+choicetext = "Have you got any brothers or sisters?" 
+choicediag = ["Yes, they're all dicks."]
+choicetext2A = "Maybe one of your brothers should have replaced you" #NEGATIVO
+choicediag2A = ["I'm the best, shut up."]
+choicetext2B = "You are brave for folliwing your dad." #POSITIVO
+choicediag2b = ["Thanks...", "Everybody treats me as garbage...", "Bernardino do this..."
+"Bernardino you're are not able to do anything", "Bernardino you are rude and immoral",
+"But y'know", "i was the only one whom proposed himself to help dad", "I...I..",
+"I just want to be closer to him.", "And if this means to learn about God, i will"]
+
+### ALBERO 3
+
+[BST3P1] #FILONE 1
+choicetext = "Which illness does your father have?"
+choicediag = ["Nobody knows it."]
+choicetext2A = "What did the doctor tell you?"
+choicediag2A = ["There's nothing more to do.", "The doctor gave him two months."]
+choicetext2B = "What did the priest tell you?"
+choicediag2B = ["'Stay calm young man'", "'God will save you'", "Tsk...", "What a jester."]
+
+
+[BST3P2] #FILONE 2
+choicetext = "Where you headed at?" 
+choicediag = ["We're going to James the Great's church in Spain."]
+choicetext2A = "There is a feast nearby if you want to rest."
+choicediag2A = ["I'd like to come, but you have to convince my father first.", "Try to speak about religion, he likes it"] 
+choicetext2B = "Do you think really that God can save you?" #NEGATIVO
+choicediag2B = ["My father thinks you're doubting God's power.", "He doesn't want to continue the conversation."]
+
+
+[BST3P3] #FILONE 3
+choicetext = "About the festival.."
+choicediag = ["I'm all ears."]
+choicetext2A = "There will be an orgy." #NEGATIVO
+choicediag2A = ["Woooow, i'll surely be th...", "You know what, i don't think i can."]
+choicetext2B = "It will be a festival in honour of the village's patron saint." #POSITIVO
+choicediag2B = ["Hmm... Intersting."]
+choicetext2C = "It will be a feast in honour of Ceres" #NEGATIVO
+choicediag2C = ["Err..", "Sorry, i don't know her."]
+
+
+##### DIRAMAZIONE ITEM OP:
+# Se hai l'item puoi convincere subito
+
+[ITEM1] #Esci dalla conversazione
+
+choicetext = "Back"
+choicediag = ["Come back with some money next time."]
+
+[ITEM2] #PROVA 1
+
+choicetext = "Is your father's teeth."
+choicediag = ["Ah.", "Useless."]
+
+[ITEM4] #WIN OR LOSE??
+
+choicetext = "Yes it is, it's from our patron saint."
+choicediag = ["Ah, and what's his name?"] 
+choicetextA = "St. Anthony" #Vinci
+choicediagA = ["Hmm... i heard of him somewhere", "But if the festival is about a saint guess i must come.", 
+"My father will not be mad, i will stay out just for a night.", "And we're talking about a saint, he will be pleased."] #VINCI
+choicetextB = "St. Lucas" #Perdi
+choicediagB = ["Hey that's impossible, i never heard of him.", "I've no time to waste talking with a cheat."]
+
+
+
+
