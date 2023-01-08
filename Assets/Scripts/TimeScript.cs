@@ -13,10 +13,14 @@ public class TimeScript : MonoBehaviour
 
     public int day;
 
+    LevelManager LevelManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        MattinaTime();
+        NotteTime();
+
+        LevelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     // Update is called once per frame

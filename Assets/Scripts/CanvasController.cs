@@ -25,14 +25,23 @@ public class CanvasController : MonoBehaviour
 
     TextMeshProUGUI NameBox;
     TextMeshProUGUI Dialogue;
+
+    GameObject ButtonChoice1;
+    GameObject ButtonChoice2;
+    GameObject ButtonChoice3;
+    GameObject ButtonChoice4;
+
     TextMeshProUGUI Choice1;
     TextMeshProUGUI Choice2;
+    TextMeshProUGUI Choice3;
+    TextMeshProUGUI Choice4;
 
 
     // la fase del giorno
-    string Phase;
+    public string Phase;
 
 
+    bool timeToTime;
     bool firstDiag;
 
 
@@ -58,8 +67,15 @@ public class CanvasController : MonoBehaviour
     {
         NameBox = GameObject.Find("NameBox").GetComponent<TextMeshProUGUI>();
         Dialogue = GameObject.Find("DiagText").GetComponent<TextMeshProUGUI>();
+
+        ButtonChoice1 = GameObject.Find("Choice1");
+        ButtonChoice2 = GameObject.Find("Choice2");
+        ButtonChoice3 = GameObject.Find("Choice3");
+        ButtonChoice4 = GameObject.Find("Choice4");
         Choice1 = GameObject.Find("Choice1").GetComponentInChildren<TextMeshProUGUI>();
         Choice2 = GameObject.Find("Choice2").GetComponentInChildren<TextMeshProUGUI>();
+        Choice3 = GameObject.Find("Choice3").GetComponentInChildren<TextMeshProUGUI>();
+        Choice4 = GameObject.Find("Choice4").GetComponentInChildren<TextMeshProUGUI>();
 
         TimeManager = GameObject.Find("Time Manager");
         LevelManager = GameObject.Find("LevelManager");
@@ -67,6 +83,8 @@ public class CanvasController : MonoBehaviour
         ButtonContainer = GameObject.Find("Buttons");
         DiagContainer.SetActive(false);
         ButtonContainer.SetActive(false);
+
+        firstDiag = true;
     }
 
     // Update is called once per frame
@@ -114,7 +132,7 @@ public class CanvasController : MonoBehaviour
 
     public void ShowMap()
     {
-        firstDiag = true;
+        timeToTime = true;
         Mappa.enabled = true;
         BGRPG1.enabled = false;
         BGRPG2.enabled = false;
@@ -159,15 +177,52 @@ public class CanvasController : MonoBehaviour
         ButtonContainer.SetActive(false);
     }
 
-    public void StartDialogue()
+    public void AllChoices()
+	{
+        ButtonChoice1.SetActive(true);
+        ButtonChoice2.SetActive(true);
+        ButtonChoice3.SetActive(true);
+        ButtonChoice4.SetActive(true);
+    }
+
+    public void Choices3()
+	{
+        ButtonChoice1.SetActive(true);
+        ButtonChoice2.SetActive(true);
+        ButtonChoice3.SetActive(true);
+        ButtonChoice4.SetActive(false);
+    }
+    public void Choices2()
+    {
+        ButtonChoice1.SetActive(true);
+        ButtonChoice2.SetActive(true);
+        ButtonChoice3.SetActive(false);
+        ButtonChoice4.SetActive(false);
+    }
+
+    public void Choices1()
+	{
+        ButtonChoice1.SetActive(true);
+        ButtonChoice2.SetActive(false);
+        ButtonChoice3.SetActive(false);
+        ButtonChoice4.SetActive(false);
+    }
+
+    public void StartDialogue(int i)
 	{
         //DiagContainer.SetActive(true);
-        LevelManager.GetComponent<LevelManager>().Dialogue();
-        if (firstDiag == true)
+        if (timeToTime == true)
+		{
+            LevelManager.GetComponent<LevelManager>().progressHindLock(i);
+        }
+
+        LevelManager.GetComponent<LevelManager>().DialogueSwitch(i);
+        if (timeToTime == true)
 		{
             TimeManager.GetComponent<TimeScript>().AdvanceTime(1);
-            firstDiag = false;
+            timeToTime = false;
         }
+
         
 
 	}
@@ -212,6 +267,12 @@ public class CanvasController : MonoBehaviour
                 break;
             case SingleTextBox.Choice2:
                 Choice2.text = text;
+                break;
+            case SingleTextBox.Choice3:
+                Choice3.text = text;
+                break;
+            case SingleTextBox.Choice4:
+                Choice4.text = text;
                 break;
             case SingleTextBox.DialogueBox:
                 Dialogue.text = "\"" + text + "\"";

@@ -1,29 +1,173 @@
-name = "TESTNAME"
+# Template
+
+name = "NOME" #NOME PG
+
+### INTRODUZIONE
+
+[introUNAVAIL]
+
+introtext = ["SORRY UNAVAILABLE RN"] #Dialogo se non è disponibile
+
+[introFirst]
+
+introtext = ["HI THERE NEWGYY"] #Intro Dialogo per la prima volta
 
 [intro]
 
-introtext = ["hello new world","all the boys and girls","ive got some true stories to tell"]
+introtext = ["ciao again"] #Intro dialogo per tutte le altre volte
 
-[choice1]
+flavortext = ["qualcosa da dire?"] #text di default prima che chiedi
 
-choicetext = "test choice 1"
-choicediag = ["you're back outside","but they still lied"]
+flavortextBST = ["dimmi cosa vuoi sapere"] #text di default nel submenu della backstory
 
+### 4 SCELTE INIZIALI
 
-[choice11]
+[choice1] #Invito alla festa
 
-choicetext = "test choice 11"
-choicediag = ["woooo ooo oooo oh","yea"]
+choicetext = "FESTA" #NEGATIVO!
+choicediag = ["HAHA NO UNLESS..?"]
 
-[choice12]
+[choice2] #BACKSTORY
 
-choicetext = "test choice 12"
-choicediag = ["STOP THE PRESSES!"]
+choicetext = "I never saw your face here, who are you?"
+choicediag = ["Oh i'm new here but don't worry i'll leave in a few days.",
+"I was hungry and tired, i just wanted to find a place to rest.",
+"In a few days i'll become a nun, but the place i'm going to is far away from here."]
 
-[choice2]
+[choice3] #ITEM OP
 
-choicetext = "test choice 2"
+choicetext = "LETTERA"
 choicediag = ["UH UH UH"]
+
+[choice4] #Esci dalla conversazione
+
+choicetext = "ESCI"
+choicediag = ["CI VEDIAMO"]
+
+##### DIRAMAZIONE BACKSTORY:
+#(LA PRIMA FASE E' SEMPRE CHILL)
+
+### ALBERO 1
+
+[BST1P1] #FILONE 1
+choicetext = "in che dio credi" 
+choicediag = ["dio"]
+
+[BST1P2] #FILONE 2
+choicetext = "altri dei" 
+choicediag = ["no è uno"]
+#menu1
+choicetext2A = "pagana mai?"
+choicediag2A = ["eww"]
+choicetext2B = "dio si e altri no?" #NEGATIVO!
+choicediag2B = ["stupid"]
+choicetext2C = "altri riti" #POSITIVO!
+choicediag2C = ["mai fatto"]
+
+[BST1P3] #FILONE 3
+choicetext = "leggende?" 
+choicediag = ["boh"]
+#menu1B
+choicetext2A = "festa?" #NEGATIVO!
+choicediag2A = ["sì...."]
+choicetext2B = "romantico" #NEGATIVO!
+choicediag2B = ["ewww"]
+choicetext2C = "cerere story!" #POSITIVO!
+choicediag2C = ["wow"]
+
+[BST1P4] #FILONE 4
+choicetext = "parla cerere" 
+choicediag = ["wow 2"]
+#menu1C
+choicetext2 = "vuoi partecipare rito?"
+choicediag2 =  ["idk..."]
+#menu1D
+choicetext2A = "aiuto col grano!"#NEGATIVO!
+choicediag2A = ["ok nn vengo"] 
+choicetext2B = "è molto interessante" #NEGATIVO!
+choicediag2B = ["ok nn vengo"]
+choicetext2C = "orgia!" #MOLTO negativo
+choicediag2C = ["blorg!"]
+
+
+### ALBERO 2
+
+[BST2P1] #FILONE 1
+choicetext = "Why do you want to become a nun?" 
+choicediag = ["Long ago i was on a trip and a group of outlaws attacked my convoy.","All the people tha were with my died.","But a man saved me from the atrocious fate"]
+#menu2
+choicetext2 = "What happens next?"
+choicediag2 = ["Sorry, but i don’t want to continue further.","What happened next wasn’t very joyous."]
+
+[BST2P2] #FILONE 2
+choicetext = "Hai voglia di quell'uomo?" #NEGATIVO!
+choicediag = ["ma bastaaa"]
+
+[BST2P3] #FILONE 3
+choicetext = "hai mai rivisto uomo" 
+choicediag = ["no"]
+#menu2B
+choicetext2 = "dove può essere"
+choicediag2 = ["lying no"]
+
+### ALBERO 3
+
+[BST3P1] #FILONE 1
+choicetext = "dove sono genitori" 
+choicediag = ["morti"]
+#menu3
+choicetext2 = "fratelli"
+choicediag2 = ["no"]
+
+[BST3P2] #FILONE 2
+choicetext = "perchè suora" 
+choicediag = ["mio fratello"]
+#menu3B
+choicetext2 = "wtf"
+choicediag2 = ["ah sorry haha"]
+
+### ALBERO 4
+
+[BST4P1] #FILONE 1
+choicetext = "dove sei diretta" 
+choicediag = ["svizzero"]
+#menu4
+choicetext2 = "perchè"
+choicediag2 = ["lontano...."]
+
+[BST4P2] #FILONE 2
+choicetext = "dio perdona?" #POSITIVO!
+choicediag = ["cosa perdona"]
+#menu4B
+choicetext2 = "in generale..."
+choicediag2 = ["ah...."]
+
+
+##### DIRAMAZIONE ITEM OP:
+# Se hai l'item puoi convincere subito
+
+[ITEM1] #Esci dalla conversazione
+
+choicetext = "ESCI"
+choicediag = ["CI VEDIAMO"]
+
+[ITEM2] #PROVA 1
+
+choicetext = "Calligrafia"
+choicediag = ["Scrittura simile..."]
+
+[ITEM3] #PROVA 2
+
+choicetext = "Hai ucciso gente"
+choicediag = ["no..? *suda*"]
+
+[ITEM4] #WIN OR LOSE??
+
+choicetext = "MINACCIA"
+choicediagA = ["NN HAI PROVE FANCULO"] #PERDI
+choicediagB = ["fuck mi hai sgamato"] #VINCI
+choicetextB2 = "Vieni alla festa"
+choicediagB2 = "ok....."
 
 
 

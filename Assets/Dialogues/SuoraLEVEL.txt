@@ -1,0 +1,174 @@
+# Template
+
+name = "Nives" #NOME PG
+
+### INTRODUZIONE
+
+[introUNAVAIL]
+
+introtext = ["UNAVAILABLE"] #Dialogo se non è disponibile
+
+[introFirst]
+
+introtext = ["Hi, i'm Nives"] #Intro Dialogo per la prima volta
+
+[intro]
+
+introtext = ["Hi, it's a pleasure to meet you again"] #Intro dialogo per tutte le altre volte
+
+flavortext = "Something to ask?" #text di default prima che chiedi
+
+flavortextBST = "What would you like to know?" #text di default nel submenu della backstory
+
+flavortextEMPTY = "..."
+
+### 4 SCELTE INIZIALI
+
+[choice1] #Invito alla festa
+
+choicetext = "Hey, there will be a festival in my village, do you want to join?"
+choicediag = ["Thank you for the offer, but i'm busy"]
+choicediagnew = ["Yeah... sure... I would be honored to join!"]
+
+[choice2] #BACKSTORY
+
+choicetext = "I never saw your face here, who are you?"
+choicediag = ["Oh i'm new here but don't worry i'll leave in a few days.",
+"I was hungry and tired, i just wanted to find a place to rest.",
+"In a few days i'll become a nun, but the place i'm going to is far away from here."]
+choicetextnew = "I'd like to know more about you"
+choicediagnew = ["Sure!"]
+
+[choice3] #ITEM OP
+
+choicetext = "LETTER"
+choicediag = ["*Should i show her the letter?"]
+
+[choice4] #Esci dalla conversazione
+
+choicetext = "Back"
+choicediag = ["God bless you"]
+
+##### DIRAMAZIONE BACKSTORY:
+#(LA PRIMA FASE E' SEMPRE CHILL)
+
+### ALBERO 1
+
+[BST1P1] #FILONE 1
+choicetext = "In which god do you believe?" 
+choicediag = ["I believe in only one God.", "The one who made himself a man and forgave us all."]
+
+[BST1P2] #FILONE 2
+choicetext = "What do you think about other gods?" 
+choicediag = ["There is only one God above us all."] #felice
+choicetext2A = "Have you ever praised other gods?"
+choicediag2A = ["Some cults are quite… gross.", "So, no i didn't"]
+choicetext2B = "How do you know that God exists But other gods don't?" #NEGATIVO!
+choicediag2B = ["What a dumb question…"]
+choicetext2C = "What do you think about religious ceremonies?" #POSITIVO!
+choicediag2C = ["I've never saw one."]
+
+[BST1P3] #FILONE 3
+choicetext = "Do you know the legends of this land?" 
+choicediag = ["I don't think i ever heard them."]
+choicetext2A = "There will be a festival in my village, do you want to join?"
+choicediag2A = ["Yeah... sure... I would be honored to join!"] #NEGATIVO! #felice
+choicetext2B = "Maybe we could have a date so i may narrate them to you." #NEGATIVO!
+choicediag2B = ["You forgot i am a nun?", "Thanks for the offer but i don't think i'll join."]
+choicetext2C = "There were a goddess name Ceres..." #POSITIVO!
+choicediag2C = ["...", "So she is the goddess of harvest", "Fascinating"] #felice
+
+[BST1P4] #FILONE 4
+choicetext = "There will be a festival in honour of Ceres" 
+choicediag = ["Hmm... Interesting"]
+choicetext2 = "Do you want to join?"
+choicediag2 =  ["I'm…I don't know."]
+choicetext2A = "You can help us with the sowing."#NEGATIVO!
+choicediag2A = ["Why not? It could be pleasant.", "I will be there."] #felice
+choicetext2B = "There will be also a feast after the sowing." #NEGATIVO!
+choicediag2B = ["Why not? It could be pleasant.", "I will be there."] #felice
+choicetext2C = "There will be an orgy." #MOLTO negativo
+choicediag2C = ["I don't think i'll join."] #felice
+
+
+### ALBERO 2
+
+[BST2P1] #FILONE 1
+choicetext = "Why do you seek to become a nun?" 
+choicediag = ["Long ago i was on a trip and a group of outlaws attacked my convoy.","All the people tha were with my died.","But a man saved me from the atrocious fate"]
+choicetext2 = "What happens next?"
+choicediag2 = ["Sorry, but i don't want to continue further.","What happened next wasn't very joyous."] 
+
+[BST2P2] #FILONE 2
+choicetext = "Can we talk about that man again?" #NEGATIVO!
+choicediag = ["No, i don't want to.", "Please let's talk about something else."]
+
+[BST2P3] #FILONE 3
+choicetext = "Have you ever seen that man again?" 
+choicediag = ["No.. I didn't."] 
+choicetext2A = "Do you know where is him now?"
+choicediag2A = ["N….no."] #preoccupata
+choicetext2B = ["Does somebody else know something about this story?"]
+choicediag2B = ["Ye…I mean no.", "Nobody else knows it."] #preoccupata
+
+### ALBERO 3
+
+[BST3P1] #FILONE 1
+choicetext = "Where are your parents?"
+choicediag = ["They're all dead"]
+choicetext2 = "Have you got any brothers or sisters?"
+choicediag2 = ["No, never had anyone."]
+
+
+[BST3P2] #FILONE 2
+choicetext = "Why do you seek to become specifically a nun?" 
+choicediag = ["My brother showed me the sacred path."]
+choicetext2 = "But you told me that you hadn't any brothers."
+choicediag2 = ["…", "Oh really…", "I…I…", "I just got confused…"] #preoccupata
+
+### ALBERO 4
+
+[BST4P1] #FILONE 1
+choicetext = "Where are you heading at?" 
+choicediag = ["I'll go in a cloister near Switzerland."]
+choicetext2 = "Why so far away?."
+choicediag2 = ["I just want to leave the past behind me."]
+
+[BST4P2] #FILONE 2
+choicetext = "God can forgive all, right?" #POSITIVO!
+choicediag = ["…", "What needs to be forgiven?"] #Preoccupata
+choicetext2 = "I mean, generally speaking…"
+choicediag2 = ["Ahh", "Well yes, God is infinitely kind."] #felice
+
+
+##### DIRAMAZIONE ITEM OP:
+# Se hai l'item puoi convincere subito
+
+[ITEM1] #Esci dalla conversazione
+
+choicetext = "Bye."
+choicediag = ["God bless you."]
+
+[ITEM2] #PROVA 1
+
+choicetext = "Excuse me, do you mind if i ask you to write down a blessing? Is for my mother."
+choicediag = ["Yes, hand me that pen over there.", "There God bless you", "*The two handwritings are very similar*"] #felice
+
+[ITEM3] #PROVA 2
+
+choicetext = "Have you ever thought of killing anybody?"
+choicediag = ["What an odd question, no, i never had that tough."] #preoccupata
+choicetext2 = "If God will ever ask you to kill someone, what will you do?"
+choicediag2 = ["What, I....I...", "Can we talk about something else please?"] #preoccupata
+
+[ITEM4] #WIN OR LOSE??
+
+choicetext = "I found a letter, and i think you wrote it"
+choicediagA = ["What you're saying is built from nothing.", "Please go away now."] #PERDI #preoccupata
+choicediagB = [" I could talk about the letter at the guards outside here…"] #VINCI
+choicetextB2 = "I just want you to come to the festival."
+choicediagB2 = "I...I'll come." #preoccupata
+
+
+
+
