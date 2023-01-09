@@ -392,6 +392,7 @@
 "Assets/LevelManager.cs"
 "Assets/Scripts/CanvasController.cs"
 "Assets/Scripts/Clickable.cs"
+"Assets/Scripts/SpigaManager.cs"
 "Assets/Scripts/TimeScript.cs"
 "Assets/Tommy.cs"
 -langversion:9.0

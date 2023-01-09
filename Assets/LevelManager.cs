@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     public TextAsset levelSource5;
     private TomlTable levelTable;
 
+    private SpigaManager SpigaManager;
     private CanvasController canvas;
     private TimeScript TimeScript;
 
@@ -42,6 +43,12 @@ public class LevelManager : MonoBehaviour
     //PG3
     public bool PG3win;
     public bool PG3lost;
+    //PG4
+    public bool PG4win;
+    public bool PG4lost;
+    //PG5
+    public bool PG5win;
+    public bool PG5lost;
 
     // Menus
     bool mainmenu = true;
@@ -178,6 +185,34 @@ public class LevelManager : MonoBehaviour
     bool PG3BST3P1done;
     bool PG3BST3P2done;
     bool PG3BST4P1done;
+    // PG4
+    int BST1Phase4;
+    int BST2Phase4;
+    int BST3Phase4;
+    int BST4Phase4;
+    // also bools per impedire il farm
+    bool PG4BST1P1done;
+    bool PG4BST1P2done;
+    bool PG4BST1P3done;
+    bool PG4BST2P1done;
+    bool PG4BST2P2done;
+    bool PG4BST3P1done;
+    bool PG4BST3P2done;
+    bool PG4BST4P1done;
+    // PG3
+    int BST1Phase5;
+    int BST2Phase5;
+    int BST3Phase5;
+    int BST4Phase5;
+    // also bools per impedire il farm
+    bool PG5BST1P1done;
+    bool PG5BST1P2done;
+    bool PG5BST1P3done;
+    bool PG5BST2P1done;
+    bool PG5BST2P2done;
+    bool PG5BST3P1done;
+    bool PG5BST3P2done;
+    bool PG5BST4P1done;
 
     // bool per impedire di avanzare right away
     // PG1
@@ -235,12 +270,14 @@ public class LevelManager : MonoBehaviour
     bool progressHind4;
     bool progressHind5;
 
+    int currentPG;
+
     // Start is called before the first frame update
     void Start()
     {
         // Set canvas controller
         canvas = GameObject.Find("Canvas Controller").GetComponent<CanvasController>();
-
+        SpigaManager = GameObject.Find("SpigaManager").GetComponent<SpigaManager>();
         TimeScript = GameObject.Find("Time Manager").GetComponent<TimeScript>();
 
 
@@ -258,13 +295,23 @@ public class LevelManager : MonoBehaviour
         BST2Phase3 = 1;
         BST3Phase3 = 1;
         BST4Phase3 = 1;
+
+        BST1Phase4 = 1;
+        BST2Phase4 = 1;
+        BST3Phase4 = 1;
+        BST4Phase4 = 1;
+
+        BST1Phase5 = 1;
+        BST2Phase5 = 1;
+        BST3Phase5 = 1;
+        BST4Phase5 = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
         Phase = canvas.Phase;
-
+        currentPG = canvas.currentPG;
 
         if (BST1P1done == true || BST2P1done == true || BST3P1done == true || BST4P1done == true)
         {
@@ -334,9 +381,11 @@ public class LevelManager : MonoBehaviour
     public void SpigaGauge(int i)
 	{
 		// per quando la spiga si alza o si abbassa
+		SpigaManager.SpigaChange(i);
 
-		if (i > 0)
+        if (i > 0)
 		{
+            
             //current spiga find
             //chiama funzione nello script di quella spiga per alzare o abbassare
             //se in quella spiga si passa un threshold interno, attiva un bool qua che triggera una riuscita della choice1
@@ -347,6 +396,30 @@ public class LevelManager : MonoBehaviour
             print("SPIGA GIU");
 		}
 	}
+
+    public void SpigaWin(int i)
+	{
+        switch (i)
+		{
+            case 1:
+                PG1win = true;
+                break;
+            case 2:
+                PG2win = true;
+                break;
+            case 3:
+                PG3win = true;
+                break;
+            case 4:
+                PG4win = true;
+                break;
+            case 5:
+                PG5win = true;
+                break;
+
+        }
+	}
+
 
     public void DialogueSwitch(int i)
 	{

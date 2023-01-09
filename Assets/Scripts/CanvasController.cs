@@ -4,11 +4,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using FMODUnity;
 
 public class CanvasController : MonoBehaviour
 {
+    StudioEventEmitter OST;
+
     GameObject TimeManager;
     GameObject LevelManager;
+    SpigaManager SpigaManager;
 
     SpriteRenderer Mappa;
     SpriteRenderer BGRPG1;
@@ -80,6 +84,7 @@ public class CanvasController : MonoBehaviour
     TextMeshProUGUI Choice3;
     TextMeshProUGUI Choice4;
 
+    public int currentPG;
 
     // la fase del giorno
     public string Phase;
@@ -109,6 +114,9 @@ public class CanvasController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OST = GetComponent<StudioEventEmitter>();
+        OST.Play();
+
         NameBox = GameObject.Find("NameBox").GetComponent<TextMeshProUGUI>();
         Dialogue = GameObject.Find("DiagText").GetComponent<TextMeshProUGUI>();
 
@@ -130,6 +138,7 @@ public class CanvasController : MonoBehaviour
         ConfidoSpiga = GameObject.Find("Confido");
         Zaino = GameObject.Find("ZAINO");
 
+        SpigaManager = GameObject.Find("SpigaManager").GetComponent<SpigaManager>();
         TimeManager = GameObject.Find("Time Manager");
         LevelManager = GameObject.Find("LevelManager");
         DiagContainer = GameObject.Find("DiagContainer");
@@ -194,6 +203,21 @@ public class CanvasController : MonoBehaviour
 
     public void ShowMap()
     {
+        OST.SetParameter("MenuDrums", 100f);
+
+        OST.SetParameter("Leader", 30f);
+        OST.SetParameter("LeaderDrums",0f);
+        OST.SetParameter("Contadina", 30f);
+        OST.SetParameter("ContadinaDrums", 0f);
+        OST.SetParameter("Suora", 30f);
+        OST.SetParameter("SuoraDrums", 0f);
+        OST.SetParameter("Ubriacone", 30f);
+        OST.SetParameter("UbriaconeDrums", 0f);
+        OST.SetParameter("Fabbro", 30f);
+        OST.SetParameter("FabbroDrums", 0f);
+        OST.SetParameter("Pellegrini", 30f);
+        OST.SetParameter("PellegriniDrums", 0f);
+
         timeToTime = true;
         Mappa.enabled = true;
         BGRPG1.enabled = false;
@@ -232,6 +256,10 @@ public class CanvasController : MonoBehaviour
 
     public void ShowPG1()
     {
+        OST.SetParameter("Suora", 60f);
+        OST.SetParameter("SuoraDrums", 90f);
+        OST.SetParameter("MenuDrums", 0f);
+
         PG1Container.SetActive(true);
         PG2Container.SetActive(false);
         PG3Container.SetActive(false);
@@ -269,6 +297,10 @@ public class CanvasController : MonoBehaviour
     }
     public void ShowPG2()
     {
+        OST.SetParameter("Contadina", 60f);
+        OST.SetParameter("ContadinaDrums", 90f);
+        OST.SetParameter("MenuDrums", 0f);
+
         PG1Container.SetActive(false);
         PG2Container.SetActive(true);
         PG3Container.SetActive(false);
@@ -306,6 +338,10 @@ public class CanvasController : MonoBehaviour
     }
     public void ShowPG3()
     {
+        OST.SetParameter("Pellegrini", 60f);
+        OST.SetParameter("PellegriniDrums", 90f);
+        OST.SetParameter("MenuDrums", 0f);
+
         PG1Container.SetActive(false);
         PG2Container.SetActive(false);
         PG3Container.SetActive(true);
@@ -468,18 +504,21 @@ public class CanvasController : MonoBehaviour
         }
 
         LevelManager.GetComponent<LevelManager>().DialogueSwitch(i);
+        SpigaManager.SpigaFind(i);
+        
         if (timeToTime == true)
 		{
             TimeManager.GetComponent<TimeScript>().AdvanceTime(1);
             timeToTime = false;
         }
 
-        
+        currentPG = i;
 
 	}
 
     public void EndDialogue()
 	{
+        SpigaManager.SpigaUpdate();
         LevelManager.GetComponent<LevelManager>().StopAllCoroutines();
         DiagContainer.SetActive(false);
     }
