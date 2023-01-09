@@ -10,9 +10,9 @@ public class SpigaManager : MonoBehaviour
 
     int SpigaPG1 = 3;
     int SpigaPG2 = 2;
-    int SpigaPG3 = 1;
-    int SpigaPG4 = 0;
-    int SpigaPG5 = 0;
+    int SpigaPG3 = 2;
+    int SpigaPG4 = 4;
+    int SpigaPG5 = 5;
 
     int currentSpiga;
     int currentPG;

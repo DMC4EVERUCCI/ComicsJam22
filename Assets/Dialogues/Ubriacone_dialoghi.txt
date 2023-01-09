@@ -1,0 +1,94 @@
+# Template
+
+name = "Gregorio" #NOME PG
+
+### INTRODUZIONE
+
+[introUNAVAIL]
+
+introtext = ["*I should check back at a later time*"] #Dialogo se non è disponibile
+introtextlose = ["*Seems like he's had enough of you*"]
+introtextwin = ["*Seems like Gregorio is preparing to go to the festival*"]
+
+[introFirst]
+
+introtext = ["Heeeeyy, I'm Gregorio...", "Want something to driink?", "My-<i>*burp*</i>... offer."] #Intro Dialogo per la prima volta
+
+[intro]
+
+introtext = ["Want to drink something?"] #Intro dialogo per tutte le altre volte
+
+flavortext = ["Some wine, perhaps?"] #text di default prima che chiedi
+
+flavortextBST = ["Beer, wine, anything you want."] #text di default nel submenu della backstory
+
+flavortextEMPTY = "..."
+
+### 4 SCELTE INIZIALI
+
+[choice1] #Invito alla festa
+
+choicetext = "There will be a festival in my village, would you like to join?" #sorpreso
+choicediag = ["What? A festival?", "Festival means wine.", "Wine means Gregorio's there", "So-<i>*hic!*</i>... I'll be there."]
+
+[choice2] #BACKSTORY
+
+choicetext = "Drinking already?"
+choicediag = ["Yep! I'm always drinking.", "And when I'm not, I'm sleeping.", "Then when I wake up, I drink again."]
+choicetextnew = "I'd like to know more about you"
+choicediagnew = ["<i>*Buurp*</i>... A'ight."]
+
+[choice3] #ITEM OP
+
+choicetext = "LOCKED"
+choicetextyes = "Hey, is this your money bag?"
+choicediag = ["What? Oh shit, give it back!"] #sorpreso
+
+[choice4] #Esci dalla conversazione
+
+choicetext = "Goodbye."
+choicediag = ["Well... see you again. Or not. Hehhh..."]
+
+##### DIRAMAZIONE BACKSTORY:
+#(LA PRIMA FASE E' SEMPRE CHILL, NON E' VERO)
+
+### ALBERO 1
+
+[BST1P1] #FILONE 1
+choicetext = "Why are you drinking?"
+choicediag = ["To forget."]
+#BSTmenu1
+choicetext2 = "...To forget what?"
+choicediag2 = ["...",".....uhhh...","...well see? It worked!"]
+
+[BST1P2] #FILONE 2
+choicetext = "Where do you find the money for paying your drinks?"
+choicediag = ["Oh, my dad pays for it."]
+#BSTmenu1B
+choicetext2 = "Is he still alive?"
+choicediag2 = ["How could I possibly drink this much if the old bastard was still alive?"] #POSITIVO
+
+### ALBERO 2
+
+[BST2P1] #FILONE 1
+choicetext = "Have you got any family left?"
+choicediag = ["Yes... I think."]
+#BSTmenu2
+choicetext2A = "Any brothers or sisters, perhaps?"
+choicediag2A = ["Luckily...", "I don't talk with those jerks anymore."] #POSITIVO
+choicetext2B = "Wife?"
+choicediag2B = ["Nah, I'm not into that.","Never was, actually."] #POSITIVO
+
+[BST2P2] #FILONE 2
+choicetext = "Don't you feel bad drinking all day?"
+choicediag = ["Why should I?", "Drinking makes me happy.","The doctor said so!"] #NEGATIVO #sorpreso
+
+
+
+##### DIRAMAZIONE ITEM OP:
+# Se hai l'item puoi convincere subito
+
+[ITEM1]
+
+choicetext = "I'll give it back if you come to the fest." #sorpreso
+choicediag = ["Fine!", "If you had told me before that there was a festival-*hic!*","I would have joined already!"]

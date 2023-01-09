@@ -51,14 +51,12 @@ public class CanvasController : MonoBehaviour
     [Header("PG4")]
     GameObject PG4Container;
     [SerializeField] SpriteRenderer PG4;
-    [SerializeField] SpriteRenderer PG4F;
     [SerializeField] SpriteRenderer PG4P;
     [SerializeField] SpriteRenderer PG4absent;
     //PG5
     [Header("PG5")]
     GameObject PG5Container;
     [SerializeField] SpriteRenderer PG5;
-    [SerializeField] SpriteRenderer PG5F;
     [SerializeField] SpriteRenderer PG5P;
     [SerializeField] SpriteRenderer PG5absent;
 
@@ -147,6 +145,16 @@ public class CanvasController : MonoBehaviour
         ButtonContainer.SetActive(false);
 
         firstDiag = true;
+
+        BGRPG1 = GameObject.Find("BGRPG1").GetComponent<SpriteRenderer>();
+        BGRPG2 = GameObject.Find("BGRPG2").GetComponent<SpriteRenderer>();
+        BGRPG3 = GameObject.Find("BGRPG3").GetComponent<SpriteRenderer>();
+        BGRPG4 = GameObject.Find("BGRPG4").GetComponent<SpriteRenderer>();
+        BGRPG5 = GameObject.Find("BGRPG5").GetComponent<SpriteRenderer>();
+
+        Phase = "NOTTE";
+        Mappa = GameObject.Find("MAPPA" + Phase).GetComponent<SpriteRenderer>();
+        ShowMap();
     }
 
     // Update is called once per frame
@@ -177,8 +185,8 @@ public class CanvasController : MonoBehaviour
         BGRPG1 = GameObject.Find("BGRPG1").GetComponent<SpriteRenderer>();
         BGRPG2 = GameObject.Find("BGRPG2").GetComponent<SpriteRenderer>();
         BGRPG3 = GameObject.Find("BGRPG3").GetComponent<SpriteRenderer>();
-        //BGRPG4 = GameObject.Find("BGRPG4").GetComponent<SpriteRenderer>();
-        //BGRPG5 = GameObject.Find("BGRPG5").GetComponent<SpriteRenderer>();
+        BGRPG4 = GameObject.Find("BGRPG4").GetComponent<SpriteRenderer>();
+        BGRPG5 = GameObject.Find("BGRPG5").GetComponent<SpriteRenderer>();
 
     }
 
@@ -189,20 +197,22 @@ public class CanvasController : MonoBehaviour
         BGRPG1.enabled = false;
         BGRPG2.enabled = false;
         BGRPG3.enabled = false;
-        //BGRPG4.enabled = false;
-        //BGRPG5.enabled = false;
+        BGRPG4.enabled = false;
+        BGRPG5.enabled = false;
         PG1.enabled = false;
         PG2.enabled = false;
         MapIcon1.enabled = false;
         MapIcon2.enabled = false;
         MapIcon3.enabled = false;
-        //MapIcon4.enabled = false;
-        //MapIcon5.enabled = false;
+        MapIcon4.enabled = false;
+        MapIcon5.enabled = false;
         EscIcon.enabled = false;
     }
 
     public void ShowMap()
     {
+        TimeManager.GetComponent<TimeScript>().WheelUpdate();
+
         OST.SetParameter("MenuDrums", 100f);
 
         OST.SetParameter("Leader", 30f);
@@ -223,32 +233,32 @@ public class CanvasController : MonoBehaviour
         BGRPG1.enabled = false;
         BGRPG2.enabled = false;
         BGRPG3.enabled = false;
-        //BGRPG4.enabled = false;
-        //BGRPG5.enabled = false;
+        BGRPG4.enabled = false;
+        BGRPG5.enabled = false;
         //PGs
         PG1.enabled = false;
 		PG2.enabled = false;
         PG3N.enabled = false;
-        //PG4.enabled = false;
-        //PG5.enabled = false;
+        PG4.enabled = false;
+        PG5.enabled = false;
         //PGabs
         PG1absent.enabled = false;
         PG2absent.enabled = false;
         PG3absent.enabled = false;
-        //PG4absent.enabled = false;
-        //PG5absent.enabled = false;
+        PG4absent.enabled = false;
+        PG5absent.enabled = false;
         //PGContainers
         PG1Container.SetActive(false);
         PG2Container.SetActive(false);
         PG3Container.SetActive(false);
-        //PG4Container.SetActive(false);
-        //PG5Container.SetActive(false);
+        PG4Container.SetActive(false);
+        PG5Container.SetActive(false);
 
         MapIcon1.enabled = true;
         MapIcon2.enabled = true;
         MapIcon3.enabled = true;
-        //MapIcon4.enabled = true;
-        //MapIcon5.enabled = true;
+        MapIcon4.enabled = true;
+        MapIcon5.enabled = true;
         EscIcon.enabled = false;
         ConfidoSpiga.SetActive(false);
         Zaino.SetActive(false);
@@ -263,17 +273,17 @@ public class CanvasController : MonoBehaviour
         PG1Container.SetActive(true);
         PG2Container.SetActive(false);
         PG3Container.SetActive(false);
-        //PG4Container.SetActive(false);
-        //PG5Container.SetActive(false);
+        PG4Container.SetActive(false);
+        PG5Container.SetActive(false);
 
         Mappa.enabled = false;
         BGRPG1.enabled = true;
         BGRPG2.enabled = false;
         BGRPG3.enabled = false;
-        //BGRPG4.enabled = false;
-        //BGRPG5.enabled = false;
+        BGRPG4.enabled = false;
+        BGRPG5.enabled = false;
 
-        if (Phase == "SERA" || LevelManager.GetComponent<LevelManager>().PG1win || LevelManager.GetComponent<LevelManager>().PG1lost)
+        if (Phase == "NOTTE" || LevelManager.GetComponent<LevelManager>().PG1win || LevelManager.GetComponent<LevelManager>().PG1lost)
         {
             PG1.enabled = false;
             PG1absent.enabled = true;
@@ -288,8 +298,8 @@ public class CanvasController : MonoBehaviour
         MapIcon1.enabled = false;
         MapIcon2.enabled = false;
         MapIcon3.enabled = false;
-        //MapIcon4.enabled = false;
-        //MapIcon5.enabled = false;
+        MapIcon4.enabled = false;
+        MapIcon5.enabled = false;
         EscIcon.enabled = true;
         
         ConfidoSpiga.SetActive(true);
@@ -304,17 +314,17 @@ public class CanvasController : MonoBehaviour
         PG1Container.SetActive(false);
         PG2Container.SetActive(true);
         PG3Container.SetActive(false);
-        //PG4Container.SetActive(false);
-        //PG5Container.SetActive(false);
+        PG4Container.SetActive(false);
+        PG5Container.SetActive(false);
 
         Mappa.enabled = false;
         BGRPG1.enabled = false;
         BGRPG2.enabled = true;
         BGRPG3.enabled = false;
-        //BGRPG4.enabled = false;
-        //BGRPG5.enabled = false;
+        BGRPG4.enabled = false;
+        BGRPG5.enabled = false;
 
-        if (Phase == "NOTTE" || LevelManager.GetComponent<LevelManager>().PG2win || LevelManager.GetComponent<LevelManager>().PG2lost)
+        if (Phase == "MATTINA" || LevelManager.GetComponent<LevelManager>().PG2win || LevelManager.GetComponent<LevelManager>().PG2lost)
         {
             PG2.enabled = false;
             PG2absent.enabled = true;
@@ -329,8 +339,8 @@ public class CanvasController : MonoBehaviour
         MapIcon1.enabled = false;
         MapIcon2.enabled = false;
         MapIcon3.enabled = false;
-        //MapIcon4.enabled = false;
-        //MapIcon5.enabled = false;
+        MapIcon4.enabled = false;
+        MapIcon5.enabled = false;
         EscIcon.enabled = true;
 
         ConfidoSpiga.SetActive(true);
@@ -345,17 +355,17 @@ public class CanvasController : MonoBehaviour
         PG1Container.SetActive(false);
         PG2Container.SetActive(false);
         PG3Container.SetActive(true);
-        //PG4Container.SetActive(false);
-        //PG5Container.SetActive(false);
+        PG4Container.SetActive(false);
+        PG5Container.SetActive(false);
 
         Mappa.enabled = false;
         BGRPG1.enabled = false;
         BGRPG2.enabled = false;
         BGRPG3.enabled = true;
-        //BGRPG4.enabled = false;
-        //BGRPG5.enabled = false;
+        BGRPG4.enabled = false;
+        BGRPG5.enabled = false;
 
-        if (Phase == "SERA" || LevelManager.GetComponent<LevelManager>().PG2win || LevelManager.GetComponent<LevelManager>().PG2lost)
+        if (Phase == "NOTTE" || LevelManager.GetComponent<LevelManager>().PG3win || LevelManager.GetComponent<LevelManager>().PG3lost)
         {
             PG3N.enabled = false;
             PG3absent.enabled = true;
@@ -370,8 +380,92 @@ public class CanvasController : MonoBehaviour
         MapIcon1.enabled = false;
         MapIcon2.enabled = false;
         MapIcon3.enabled = false;
-        //MapIcon4.enabled = false;
-        //MapIcon5.enabled = false;
+        MapIcon4.enabled = false;
+        MapIcon5.enabled = false;
+        EscIcon.enabled = true;
+
+        ConfidoSpiga.SetActive(true);
+        Zaino.SetActive(true);
+    }
+
+    public void ShowPG4()
+    {
+        OST.SetParameter("Fabbro", 60f);
+        OST.SetParameter("FabbroDrums", 90f);
+        OST.SetParameter("MenuDrums", 0f);
+
+        PG1Container.SetActive(false);
+        PG2Container.SetActive(false);
+        PG3Container.SetActive(false);
+        PG4Container.SetActive(true);
+        PG5Container.SetActive(false);
+
+        Mappa.enabled = false;
+        BGRPG1.enabled = false;
+        BGRPG2.enabled = false;
+        BGRPG3.enabled = false;
+        BGRPG4.enabled = true;
+        BGRPG5.enabled = false;
+
+        if (Phase == "POME" || LevelManager.GetComponent<LevelManager>().PG4win || LevelManager.GetComponent<LevelManager>().PG4lost)
+        {
+            PG4.enabled = false;
+            PG4absent.enabled = true;
+        }
+        else
+        {
+            PG4.enabled = true;
+            PG4absent.enabled = false;
+            PG4Emoji(1);
+        }
+
+        MapIcon1.enabled = false;
+        MapIcon2.enabled = false;
+        MapIcon3.enabled = false;
+        MapIcon4.enabled = false;
+        MapIcon5.enabled = false;
+        EscIcon.enabled = true;
+
+        ConfidoSpiga.SetActive(true);
+        Zaino.SetActive(true);
+    }
+
+    public void ShowPG5()
+    {
+        OST.SetParameter("Ubriacone", 60f);
+        OST.SetParameter("UbriaconeDrums", 90f);
+        OST.SetParameter("MenuDrums", 0f);
+
+        PG1Container.SetActive(false);
+        PG2Container.SetActive(false);
+        PG3Container.SetActive(false);
+        PG4Container.SetActive(false);
+        PG5Container.SetActive(true);
+
+        Mappa.enabled = false;
+        BGRPG1.enabled = false;
+        BGRPG2.enabled = false;
+        BGRPG3.enabled = false;
+        BGRPG4.enabled = false;
+        BGRPG5.enabled = true;
+
+        if (Phase == "SERA" || LevelManager.GetComponent<LevelManager>().PG5win || LevelManager.GetComponent<LevelManager>().PG5lost)
+        {
+            PG5.enabled = false;
+            PG5absent.enabled = true;
+        }
+        else
+        {
+            PG5.enabled = true;
+            PG5absent.enabled = false;
+            PG5Emoji(1);
+        }
+
+        MapIcon1.enabled = false;
+        MapIcon2.enabled = false;
+        MapIcon3.enabled = false;
+        MapIcon4.enabled = false;
+        MapIcon5.enabled = false;
         EscIcon.enabled = true;
 
         ConfidoSpiga.SetActive(true);
@@ -448,6 +542,34 @@ public class CanvasController : MonoBehaviour
                 PG3FN.enabled = false;
                 PG3FA.enabled = false;
                 PG3AF.enabled = true;
+                break;
+        }
+    }
+    public void PG4Emoji(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                PG4.enabled = true;
+                PG4P.enabled = false;
+                break;
+            case 2:
+                PG4.enabled = false;
+                PG4P.enabled = true;
+                break;
+        }
+    }
+    public void PG5Emoji(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                PG5.enabled = true;
+                PG5P.enabled = false;
+                break;
+            case 2:
+                PG5.enabled = false;
+                PG5P.enabled = true;
                 break;
         }
     }

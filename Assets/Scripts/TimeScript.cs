@@ -9,6 +9,11 @@ public class TimeScript : MonoBehaviour
     public bool sera;
     public bool notte;
 
+    [SerializeField] SpriteRenderer mattinaIcon;
+    [SerializeField] SpriteRenderer pomeIcon;
+    [SerializeField] SpriteRenderer seraIcon;
+    [SerializeField] SpriteRenderer notteIcon;
+
     public int phaseNum;
 
     public int day;
@@ -60,6 +65,44 @@ public class TimeScript : MonoBehaviour
 		}
     }
 
+    public void WheelUpdate()
+	{
+        if (mattina == true)
+        {
+
+            mattinaIcon.enabled = true;
+            pomeIcon.enabled = false;
+            seraIcon.enabled = false;
+            notteIcon.enabled = false;
+        }
+        else if (pome == true)
+        {
+
+            mattinaIcon.enabled = false;
+            pomeIcon.enabled = true;
+            seraIcon.enabled = false;
+            notteIcon.enabled = false;
+        }
+        else if (sera == true)
+        {
+
+            mattinaIcon.enabled = false;
+            pomeIcon.enabled = false;
+            seraIcon.enabled = true;
+            notteIcon.enabled = false;
+        }
+        else if (notte == true)
+        {
+
+            mattinaIcon.enabled = false;
+            pomeIcon.enabled = false;
+            seraIcon.enabled = false;
+            notteIcon.enabled = true;
+
+            
+        }
+    }
+
     public void MattinaTime()
     {
         mattina = true;
@@ -75,6 +118,7 @@ public class TimeScript : MonoBehaviour
         pome = true;
         sera = false;
         notte = false;
+
     }
 
     public void SeraTime()
@@ -84,6 +128,7 @@ public class TimeScript : MonoBehaviour
         pome = false;
         sera = true;
         notte = false;
+
     }
 
     public void NotteTime()
@@ -93,6 +138,7 @@ public class TimeScript : MonoBehaviour
         pome = false;
         sera = false;
         notte = true;
+
     }
 
 

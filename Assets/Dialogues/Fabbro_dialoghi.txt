@@ -1,0 +1,117 @@
+# Template
+
+name = "Alessandro" #NOME PG
+
+### INTRODUZIONE
+
+[introUNAVAIL]
+
+introtext = ["*I should check back at a later time*"] #Dialogo se non è disponibile
+introtextlose = ["*Seems like he's had enough of you*"]
+introtextwin = ["*Seems like Alessandro is preparing to go to the festival*"]
+
+[introFirst]
+
+introtext = ["Hi, I'm Alessandro. I work here as an apprendice.", "Wanna buy something, or you're just lurking?"] #Intro Dialogo per la prima volta
+
+[intro]
+
+introtext = ["Ahhh, my favourite customer."] #Intro dialogo per tutte le altre volte
+
+flavortext = ["Want to buy something?"] #text di default prima che chiedi
+
+flavortextBST = ["Shoot."] #text di default nel submenu della backstory
+
+flavortextEMPTY = "..."
+
+### 4 SCELTE INIZIALI
+
+[choice1] #Invito alla festa
+
+choicetext = "There will be a festival in my village, would you like to join?"
+choicediag = ["Sorry man, I have to work."] #incupito
+choicediagnew = ["You know what? I'm in!","I could use a breath of fresh air for once."]
+
+[choice2] #BACKSTORY
+
+choicetext = "Can we talk a bit or are you in the middle of something?"
+choicediag = ["Well...", "I'm working now, but we can still exchange a few words."]
+choicetextnew = "I'd like to know more about you"
+choicediagnew = ["No problem."]
+
+[choice3] #Esci dalla conversazione
+
+choicetext = "Goodbye."
+choicediag = ["Come back again, whenever you're around."]
+
+##### DIRAMAZIONE BACKSTORY:
+#(LA PRIMA FASE E' SEMPRE CHILL)
+
+### ALBERO 1
+
+[BST1P1] #FILONE 1
+choicetext = "Who are you working for?" 
+choicediag = ["My uncle...","I know, I know.","Working with family is tougher than most people think though."]
+#BSTmenu1
+choicetext2A = "Where are your parents?" #NEGATIVO
+choicediag2A = ["They're...", "They're not here."] #incupito
+choicetext2B = "What do you think about your boss?"
+choicediag2B = ["He's a little bit...", "Demanding...", "And somewhat cruel sometimes", "But I know that deep inside he's a good man.", "Just really, <i>really</i> deep inside."] 
+
+
+### ALBERO 2
+
+[BST2P1] #FILONE 1
+choicetext = "What are you working on?" 
+choicediag = ["An armor.", "A soldier came by and asked for it.", "I'm placing in it all the care that I can muster."]
+#BSTmenu2
+choicetext2A = "Do you like you job?" #POSITIVO
+choicediag2A = ["You know...", "Sometimes it's ardous, to say the least.", "But I love making things that help other people, in a practical way."] 
+choicetext2B = "How much do you work every day?" #POSITIVO
+choicediag2B = ["I work a <i>LOT</i>.", "But at least I get paid."] 
+
+[BST2P2] #FILONE 2
+choicetext = "You're young... still, you work more than most adults." 
+choicediag = ["Well, my uncle demands a lot."]
+#BSTmenu2B
+choicetext2A = "You should take a day off sometimes." #NEGATIVO
+choicediag2A = ["Don't think I could, honestly.","I could hardly affoard it."]
+choicetext2B = "Good, society needs workers just like you." #POSITIVO
+choicediag2B = ["Thanks...", "At the end of the day I just do what I have to."]
+
+### ALBERO 3
+
+[BST3P1] #FILONE 1
+choicetext = "What do you think about other gods?"
+choicediag = ["What can I say? I'm not religious at all."]
+#BSTmenu3
+choicetext2A = "...you don't believe in God?"
+choicediag2A = ["N-", "I mean YES, <i>OBVIOUSLY</i> I believe in God!", "(It's my uncle, he's very religious...)."]
+choicetext2B = "Have you ever joined any... non-christian ceremonies?"
+choicediag2B = ["Not yet, but there's always a first for everything I think."] #incupito
+
+
+[BST3P2] #FILONE 2
+choicetext = "A young man like you should celebrate sometimes." 
+choicediag = ["I know... Work still comes first though."]
+#BSTmenu3B
+choicetext2A = "Well, the more people you meet the more clients you'll have." #POSITIVO
+choicediag2A = ["Hmm...", "I can't say you're wrong."] 
+choicetext2B = "Town festivals are the best." #POSITIVO
+choicediag2B = ["Yeah...", "I can't remember the last time I've been to one"] #incupito
+
+
+[BST3P3] #FILONE 3
+choicetext = "You got any girlfriend?"
+choicediag = ["Ehehehe...", "Nah...not yet", "But I'm working on that."]
+#BSTmenu3C
+choicetext2A = "What's holding you back?" #POSITIVO
+choicediag2A = ["Well...", "I'm working all day and I don't have time to go on dates","Ugh...","Maybe I should join that festival of yours."]
+choicetext2B = "Of course you don't, have your seen yourself?" #POSITIVO
+choicediag2B = ["...", "Not funny, man."]
+#CAMBIATO (TOLTO ROBA)
+
+
+
+
+

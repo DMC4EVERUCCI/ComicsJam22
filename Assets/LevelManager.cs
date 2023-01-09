@@ -118,6 +118,35 @@ public class LevelManager : MonoBehaviour
     bool SpigaTimeBST3P3BPG3; //neg
     bool SpigaTimeBST3P3CPG3; //pos
 
+    // SpigaCheck PG4
+    bool SpigaTimeFestaPG4; //neg
+    bool SpigaTimeBST1P2APG4; //
+    bool SpigaTimeBST1P2BPG4; //
+    bool SpigaTimeBST2P1APG4; //
+    bool SpigaTimeBST2P1BPG4; //
+    bool SpigaTimeBST2P2APG4; //
+    bool SpigaTimeBST2P2BPG4; //
+    bool SpigaTimeBST3P2BPG4; //
+    bool SpigaTimeBST3P3APG4; //
+    bool SpigaTimeBST3P3BPG4; //
+    bool SpigaTimeBST3P3CPG4; //
+    bool SpigaTimeBST3P2APG4;
+
+    // SpigaCheck PG5
+    bool SpigaTimeFestaPG5; //neg
+    bool SpigaTimeBST1P2APG5; //
+    bool SpigaTimeBST1P2BPG5; //
+    bool SpigaTimeBST2P1APG5; //
+    bool SpigaTimeBST2P1BPG5; //
+    bool SpigaTimeBST2P2APG5; //
+    bool SpigaTimeBST2P2BPG5; //
+    bool SpigaTimeBST3P2BPG5; //
+    bool SpigaTimeBST3P3APG5; //
+    bool SpigaTimeBST3P3BPG5; //
+    bool SpigaTimeBST3P3CPG5; //
+    bool SpigaTimeBST3P2APG5;
+    bool SpigaTimeBST1P1APG5;
+
 
     string PGUnavail;
     string Phase;
@@ -131,11 +160,18 @@ public class LevelManager : MonoBehaviour
     string seedInt = "";
     string PG2choice2int = "";
     string PG2choice1int = "";
-    // PG2
+    // PG3
     string toothInt = "";
     string PG3choice2int = "";
     string PG3choice1int = "";
     bool PG3bad;
+    // PG4
+    string PG4choice2int = "";
+    string PG4choice1int = "";
+    // PG5
+    string moneyInt = "";
+    string PG5choice2int = "";
+    string PG5choice1int = "";
 
 
     // ints per tenere traccia del dialogo
@@ -199,7 +235,7 @@ public class LevelManager : MonoBehaviour
     bool PG4BST3P1done;
     bool PG4BST3P2done;
     bool PG4BST4P1done;
-    // PG3
+    // PG5
     int BST1Phase5;
     int BST2Phase5;
     int BST3Phase5;
@@ -262,6 +298,40 @@ public class LevelManager : MonoBehaviour
     int PG3currentPhase3P2;
     int PG3currentDay4P1;
     int PG3currentPhase4P1;
+    // PG4
+    int PG4currentDay1P1;
+    int PG4currentPhase1P1;
+    int PG4currentDay1P2;
+    int PG4currentPhase1P2;
+    int PG4currentDay1P3;
+    int PG4currentPhase1P3;
+    int PG4currentDay2P1;
+    int PG4currentPhase2P1;
+    int PG4currentDay2P2;
+    int PG4currentPhase2P2;
+    int PG4currentDay3P1;
+    int PG4currentPhase3P1;
+    int PG4currentDay3P2;
+    int PG4currentPhase3P2;
+    int PG4currentDay4P1;
+    int PG4currentPhase4P1;
+    // PG5
+    int PG5currentDay1P1;
+    int PG5currentPhase1P1;
+    int PG5currentDay1P2;
+    int PG5currentPhase1P2;
+    int PG5currentDay1P3;
+    int PG5currentPhase1P3;
+    int PG5currentDay2P1;
+    int PG5currentPhase2P1;
+    int PG5currentDay2P2;
+    int PG5currentPhase2P2;
+    int PG5currentDay3P1;
+    int PG5currentPhase3P1;
+    int PG5currentDay3P2;
+    int PG5currentPhase3P2;
+    int PG5currentDay4P1;
+    int PG5currentPhase4P1;
 
     // PGs
     bool progressHind1;
@@ -333,6 +403,7 @@ public class LevelManager : MonoBehaviour
             ItemHandler(1);
             ItemHandler(2);
             ItemHandler(3);
+            ItemHandler(4);
         }
 
     }
@@ -353,6 +424,11 @@ public class LevelManager : MonoBehaviour
                 // mett in inventario
                 toothInt = "yes";
                 break;
+            case 4:
+                // mett in inventario
+                moneyInt = "yes";
+                break;
+
         }
 	}
 
@@ -402,19 +478,19 @@ public class LevelManager : MonoBehaviour
         switch (i)
 		{
             case 1:
-                PG1win = true;
+                PG1SpigaDONE = true;
                 break;
             case 2:
-                PG2win = true;
+                PG2SpigaDONE = true;
                 break;
             case 3:
-                PG3win = true;
+                PG3SpigaDONE = true;
                 break;
             case 4:
-                PG4win = true;
+                PG4SpigaDONE = true;
                 break;
             case 5:
-                PG5win = true;
+                PG5SpigaDONE = true;
                 break;
 
         }
@@ -434,7 +510,7 @@ public class LevelManager : MonoBehaviour
                 // TOML table translation
                 levelTable = TOML.Parse(new StringReader(fileContents));
 
-                PGUnavail = "NOTTE";
+                PGUnavail = "MATTINA";
 
                 StartCoroutine(dialogueP1Routine(PGUnavail));
                 break;
@@ -446,7 +522,7 @@ public class LevelManager : MonoBehaviour
                 // TOML table translation
                 levelTable = TOML.Parse(new StringReader(fileContents));
 
-                PGUnavail = "MATTINA";
+                PGUnavail = "POME";
 
                 StartCoroutine(dialogueP2Routine(PGUnavail));
                 break;
@@ -458,9 +534,33 @@ public class LevelManager : MonoBehaviour
                 // TOML table translation
                 levelTable = TOML.Parse(new StringReader(fileContents));
 
-                PGUnavail = "NOTTE";
+                PGUnavail = "MATTINA";
 
                 StartCoroutine(dialogueP3Routine(PGUnavail));
+                break;
+            case 4:
+                // File reading works correctly
+                fileContents = levelSource4.ToString();
+                //Debug.Log(fileContents);
+
+                // TOML table translation
+                levelTable = TOML.Parse(new StringReader(fileContents));
+
+                PGUnavail = "SERA";
+
+                StartCoroutine(dialogueP4Routine(PGUnavail));
+                break;
+            case 5:
+                // File reading works correctly
+                fileContents = levelSource5.ToString();
+                //Debug.Log(fileContents);
+
+                // TOML table translation
+                levelTable = TOML.Parse(new StringReader(fileContents));
+
+                PGUnavail = "NOTTE";
+
+                StartCoroutine(dialogueP5Routine(PGUnavail));
                 break;
         }
 
@@ -641,6 +741,7 @@ public class LevelManager : MonoBehaviour
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
+                    yield return null;
                 }
             }
 
@@ -1479,6 +1580,7 @@ public class LevelManager : MonoBehaviour
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
+                    yield return null;
                 }
 
                 if (pressedButton == 2)
@@ -1577,6 +1679,7 @@ public class LevelManager : MonoBehaviour
                         canvas.AllChoices();
                         actionInProgress = false;
                         canvas.EndDialogue();
+                        yield return null;
                     }
 
                 }
@@ -1622,7 +1725,8 @@ public class LevelManager : MonoBehaviour
                     canvas.PG1Emoji(1);
 
                     PG1win = true;
-
+                    
+                    pressedButton = 0;
                     mainmenu = true;
                     ItemMenu = false;
                     ItemMenu3 = false;
@@ -1630,7 +1734,7 @@ public class LevelManager : MonoBehaviour
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
-                    pressedButton = 0;
+                    yield return null;
                 }
             }
 
@@ -1745,6 +1849,7 @@ public class LevelManager : MonoBehaviour
                         canvas.AllChoices();
                         actionInProgress = false;
                         canvas.EndDialogue();
+                        yield return null;
                     }
 					else
 					{
@@ -1842,6 +1947,7 @@ public class LevelManager : MonoBehaviour
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
+                    yield return null;
                 }
             }
 
@@ -2175,6 +2281,7 @@ public class LevelManager : MonoBehaviour
                         canvas.AllChoices();
                         actionInProgress = false;
                         canvas.EndDialogue();
+                        yield return null;
                     }
                 }
 
@@ -2681,6 +2788,7 @@ public class LevelManager : MonoBehaviour
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
+                    yield return null;
                 }
 
                 if (pressedButton == 2)
@@ -2722,6 +2830,7 @@ public class LevelManager : MonoBehaviour
 
                     PG2win = true;
 
+                    pressedButton = 0;
                     mainmenu = true;
                     ItemMenu = false;
                     ItemMenu3 = false;
@@ -2729,7 +2838,7 @@ public class LevelManager : MonoBehaviour
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
-                    pressedButton = 0;
+                    yield return null;
                 }
             }
 
@@ -2753,7 +2862,7 @@ public class LevelManager : MonoBehaviour
             BST2Phase = BST2Phase3;
             BST3Phase = BST3Phase3;
             BST4Phase = BST4Phase3;
-            progressHind2 = true;
+            progressHind3 = true;
         }
 
 
@@ -2843,6 +2952,7 @@ public class LevelManager : MonoBehaviour
                         canvas.AllChoices();
                         actionInProgress = false;
                         canvas.EndDialogue();
+                        yield return null;
                     }
                     else
                     {
@@ -2969,6 +3079,7 @@ public class LevelManager : MonoBehaviour
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
+                    yield return null;
                 }
             }
 
@@ -2993,11 +3104,6 @@ public class LevelManager : MonoBehaviour
                     PG3currentDay1P1 = TimeScript.day;
                     PG3choice2int = "new";
 
-                    if (!PG3BST1P1done)
-                    {
-                        BST1Phase3++;
-                        PG3BST1P1done = true;
-                    }
 
                     canvas.ShowChoices();
                     canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
@@ -3144,7 +3250,7 @@ public class LevelManager : MonoBehaviour
                         canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
                         canvas.printToTextBox(levelTable["BST3P3"]["choicetext2A"].ToString(), Boxes.Choice1);
                         canvas.printToTextBox(levelTable["BST3P3"]["choicetext2B"].ToString(), Boxes.Choice2);
-                        canvas.printToTextBox(levelTable["BST3P3"]["choicetext2C"].ToString(), Boxes.Choice2);
+                        canvas.printToTextBox(levelTable["BST3P3"]["choicetext2C"].ToString(), Boxes.Choice3);
 
                         mainmenu = false;
                         BSTMenu = false;
@@ -3596,6 +3702,7 @@ public class LevelManager : MonoBehaviour
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
+                    yield return null;
                 }
 
                 if (pressedButton == 2) // BAD
@@ -3614,6 +3721,7 @@ public class LevelManager : MonoBehaviour
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
+                    yield return null;
                 }
 
                 if (pressedButton == 3)
@@ -3656,13 +3764,14 @@ public class LevelManager : MonoBehaviour
 
                     PG3win = true;
 
+                    pressedButton = 0;
                     mainmenu = true;
                     ItemMenu = false;
                     ItemMenu3 = false;
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
-                    pressedButton = 0;
+                    yield return null;
                 }
 
                 if (pressedButton == 2)
@@ -3674,12 +3783,711 @@ public class LevelManager : MonoBehaviour
 
                     PG3lost = true;
 
+                    pressedButton = 0;
                     mainmenu = true;
                     ItemMenu = false;
                     ItemMenu3 = false;
                     canvas.AllChoices();
                     actionInProgress = false;
                     canvas.EndDialogue();
+                    yield return null;
+                }
+            }
+
+            yield return null;
+        }
+
+
+    }
+
+
+    public IEnumerator dialogueP4Routine(string PGUnavail)
+    {
+
+        // Wait a frame to allow for initialization of other classes
+        yield return null;
+
+        actionInProgress = true;
+
+        if (progressHind4 == false)
+        {
+            BST1Phase = BST1Phase4;
+            BST2Phase = BST2Phase4;
+            BST3Phase = BST3Phase4;
+            BST4Phase = BST4Phase4;
+            progressHind4 = true;
+        }
+
+
+        // Change name of pg
+        string name = levelTable["name"].ToString();
+        canvas.printToTextBox(name, Boxes.Name);
+
+        // Se la fase corrente è quella in cui non ci sono:
+        if (Phase == PGUnavail)
+        {
+            List<string> introTextUNAVAIL = getStringList(levelTable["introUNAVAIL"]["introtext"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introTextUNAVAIL, MultiBoxes.DialogueBox));
+
+            actionInProgress = false;
+            canvas.EndDialogue();
+            yield return null;
+        }
+
+        if (PG4lost)
+        {
+            List<string> introTextLOSE = getStringList(levelTable["introUNAVAIL"]["introtextlose"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introTextLOSE, MultiBoxes.DialogueBox));
+
+            actionInProgress = false;
+            canvas.EndDialogue();
+            yield return null;
+        }
+        if (PG4win)
+        {
+            List<string> introTextWIN = getStringList(levelTable["introUNAVAIL"]["introtextwin"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introTextWIN, MultiBoxes.DialogueBox));
+
+            actionInProgress = false;
+            canvas.EndDialogue();
+            yield return null;
+        }
+
+
+        // Generate and print intro text
+        if (firstTime4) // se è la prima volta
+        {
+            firstTime4 = false;
+            List<string> introFirstText = getStringList(levelTable["introFirst"]["introtext"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introFirstText, MultiBoxes.DialogueBox));
+        }
+        else // tutte le altre volte
+        {
+            List<string> introText = getStringList(levelTable["intro"]["introtext"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introText, MultiBoxes.DialogueBox));
+        }
+
+        // mostra le prime scelte
+        canvas.ShowChoices();
+        canvas.Choices3();
+        canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+        canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+        canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+        canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+        while (true)
+        {
+            if (mainmenu == true) // MAIN MENU
+            {
+                if (pressedButton == 1)  // INVITO FESTA
+                {
+                    canvas.HideChoices();
+
+                    if (PG4SpigaDONE == true)
+                    {
+                        PG4choice1int = "new";
+                        PG4win = true;
+
+                        SpigaGauge(5);
+
+                        
+
+                        List<string> choice1diagnew = getStringList(levelTable["choice1"]["choicediag" + PG4choice1int].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(choice1diagnew, MultiBoxes.DialogueBox));
+
+
+                        pressedButton = 0;
+
+                        mainmenu = true;
+                        canvas.AllChoices();
+                        actionInProgress = false;
+                        canvas.EndDialogue();
+                        yield return null;
+                    }
+                    else
+                    {
+                        PG4choice1int = "";
+
+                        if (SpigaTimeFestaPG4 == false)
+                        {
+                            SpigaGauge(-1);
+                            SpigaTimeFestaPG4 = true;
+                        }
+                    }
+                    // PG4 P
+                    canvas.PG4Emoji(2);
+
+                    List<string> choice1diag = getStringList(levelTable["choice1"]["choicediag" + PG4choice1int].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(choice1diag, MultiBoxes.DialogueBox));
+
+                    // PG4 N
+                    canvas.PG4Emoji(1);
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 2) // BST
+                {
+                    canvas.HideChoices();
+
+                    List<string> choice2diag = getStringList(levelTable["choice2"]["choicediag" + PG4choice2int].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(choice2diag, MultiBoxes.DialogueBox));
+
+                    PG4choice2int = "new";
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortextBST"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["BST1P1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["BST2P" + BST2Phase]["choicetext"].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["BST3P" + BST3Phase]["choicetext"].ToString(), Boxes.Choice3);
+
+                    BSTMenu = true;
+                    mainmenu = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 3) //ITEM OP
+                {
+                    canvas.HideChoices();
+
+                    List<string> choice3diag = getStringList(levelTable["choice3"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(choice3diag, MultiBoxes.DialogueBox));
+
+                    pressedButton = 0;
+
+                    mainmenu = true;
+                    canvas.AllChoices();
+                    actionInProgress = false;
+                    canvas.EndDialogue();
+                    yield return null;
+
+                }
+
+            }
+
+            // BSTmenu
+            if (BSTMenu == true)
+            {
+                if (pressedButton == 1)
+                {
+
+                    canvas.HideChoices();
+
+
+                    List<string> BST1P1diag = getStringList(levelTable["BST1P1"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST1P1diag, MultiBoxes.DialogueBox));
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["BST1P1"]["choicetext2A"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["BST1P1"]["choicetext2B"].ToString(), Boxes.Choice2);
+
+                    mainmenu = false;
+                    BSTMenu = false;
+                    BSTMenu1 = true;
+                    canvas.Choices2();
+                    pressedButton = 0;
+
+                }
+
+                if (pressedButton == 2)
+                {
+                    if (BST2Phase == 1)
+                    {
+                        canvas.HideChoices();
+
+                        List<string> BST2P1diag = getStringList(levelTable["BST2P1"]["choicediag"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(BST2P1diag, MultiBoxes.DialogueBox));
+
+                        PG4currentPhase2P1 = TimeScript.phaseNum;
+                        PG4currentDay2P1 = TimeScript.day;
+
+                        if (!PG4BST2P1done)
+                        {
+                            BST2Phase4++;
+                            PG4BST2P1done = true;
+                        }
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["BST2P1"]["choicetext2A"].ToString(), Boxes.Choice1);
+                        canvas.printToTextBox(levelTable["BST2P1"]["choicetext2B"].ToString(), Boxes.Choice2);
+
+                        mainmenu = false;
+                        BSTMenu = false;
+                        BSTMenu1 = false;
+                        BSTMenu2 = true;
+                        canvas.Choices2();
+                        pressedButton = 0;
+                    }
+
+                    if (BST2Phase == 2 && (PG4currentPhase2P1 != TimeScript.phaseNum || PG4currentDay2P1 != TimeScript.day))
+                    {
+                        canvas.HideChoices();
+
+                        List<string> BST2P2diag = getStringList(levelTable["BST2P2"]["choicediag"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(BST2P2diag, MultiBoxes.DialogueBox));
+
+                        PG4currentPhase2P2 = TimeScript.phaseNum;
+                        PG4currentDay2P2 = TimeScript.day;
+
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["BST2P2"]["choicetext2A"].ToString(), Boxes.Choice1);
+                        canvas.printToTextBox(levelTable["BST2P2"]["choicetext2B"].ToString(), Boxes.Choice2);
+
+                        mainmenu = false;
+                        BSTMenu = false;
+                        BSTMenu1 = false;
+                        BSTMenu2 = false;
+                        BSTMenu2B = true;
+                        canvas.Choices2();
+                        pressedButton = 0;
+                    }
+                }
+
+                if (pressedButton == 3)
+                {
+                    if (BST3Phase == 1)
+                    {
+                        canvas.HideChoices();
+
+                        List<string> BST3P1diag = getStringList(levelTable["BST3P1"]["choicediag"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(BST3P1diag, MultiBoxes.DialogueBox));
+
+                        PG4currentPhase3P1 = TimeScript.phaseNum;
+                        PG4currentDay3P1 = TimeScript.day;
+
+                        if (!PG4BST3P1done)
+                        {
+                            BST3Phase4++;
+                            PG4BST3P1done = true;
+                        }
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["BST3P1"]["choicetext2A"].ToString(), Boxes.Choice1);
+                        canvas.printToTextBox(levelTable["BST3P1"]["choicetext2B"].ToString(), Boxes.Choice2);
+
+                        mainmenu = false;
+                        BSTMenu = false;
+                        BSTMenu3 = true;
+                        canvas.Choices2();
+                        pressedButton = 0;
+                    }
+
+                    if (BST3Phase == 2 && (PG4currentPhase3P1 != TimeScript.phaseNum || PG4currentDay3P1 != TimeScript.day))
+                    {
+                        canvas.HideChoices();
+
+                        List<string> BST3P2diag = getStringList(levelTable["BST3P2"]["choicediag"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(BST3P2diag, MultiBoxes.DialogueBox));
+
+                        if (!PG4BST3P2done)
+                        {
+                            BST3Phase4++;
+                            PG4BST3P2done = true;
+                        }
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["BST3P2"]["choicetext2A"].ToString(), Boxes.Choice1);
+                        canvas.printToTextBox(levelTable["BST3P2"]["choicetext2B"].ToString(), Boxes.Choice2);
+
+                        mainmenu = false;
+                        BSTMenu = false;
+                        BSTMenu3 = false;
+                        BSTMenu3B = true;
+                        canvas.Choices2();
+                        pressedButton = 0;
+                    }
+
+                    if (BST3Phase == 3 && (PG4currentPhase3P2 != TimeScript.phaseNum || PG4currentDay3P2 != TimeScript.day))
+                    {
+                        canvas.HideChoices();
+
+                        List<string> BST3P2diag = getStringList(levelTable["BST3P2"]["choicediag"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(BST3P2diag, MultiBoxes.DialogueBox));
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["BST3P3"]["choicetext2A"].ToString(), Boxes.Choice1);
+                        canvas.printToTextBox(levelTable["BST3P3"]["choicetext2B"].ToString(), Boxes.Choice2);
+
+                        mainmenu = false;
+                        BSTMenu = false;
+                        BSTMenu3 = false;
+                        BSTMenu3B = false;
+                        BSTMenu3C = true;
+                        canvas.Choices3();
+                        pressedButton = 0;
+                    }
+                }
+
+            }
+
+            if (BSTMenu1 == true)
+            {
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
+
+                    // PG4 P
+                    canvas.PG4Emoji(2);
+
+                    List<string> BST1P1diag2A = getStringList(levelTable["BST1P1"]["choicediag2A"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST1P1diag2A, MultiBoxes.DialogueBox));
+
+                    if (SpigaTimeBST1P2APG4 == false)
+                    {
+                        SpigaGauge(-1);
+                        SpigaTimeBST1P2APG4 = true;
+                    }
+
+                    // PG4 N
+                    canvas.PG4Emoji(1);
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu1 = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 2)
+                {
+                    canvas.HideChoices();
+
+
+                    List<string> BST1P1diag2B = getStringList(levelTable["BST1P1"]["choicediag2B"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST1P1diag2B, MultiBoxes.DialogueBox));
+
+
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu1 = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+
+
+            }
+
+
+            if (BSTMenu2 == true)
+            {
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
+
+
+                    List<string> BST2P1diag2A = getStringList(levelTable["BST2P1"]["choicediag2A"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST2P1diag2A, MultiBoxes.DialogueBox));
+
+                    if (SpigaTimeBST2P1APG4 == false)
+                    {
+                        SpigaGauge(1);
+                        SpigaTimeBST2P1APG4 = true;
+                    }
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu2 = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 2)
+                {
+                    canvas.HideChoices();
+
+                    List<string> BST2P1diag2B = getStringList(levelTable["BST2P1"]["choicediag2B"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST2P1diag2B, MultiBoxes.DialogueBox));
+
+                    if (SpigaTimeBST2P1BPG4 == false)
+                    {
+                        SpigaGauge(1);
+                        SpigaTimeBST2P1BPG4 = true;
+                    }
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu2 = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+            }
+
+            if (BSTMenu2B == true)
+            {
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
+
+                    List<string> BST2P2diag2A = getStringList(levelTable["BST2P2"]["choicediag2A"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST2P2diag2A, MultiBoxes.DialogueBox));
+
+                    if (SpigaTimeBST2P2APG4 == false)
+                    {
+                        SpigaGauge(-1);
+                        SpigaTimeBST2P2APG4 = true;
+                    }
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu2 = false;
+                    BSTMenu2B = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 2)
+                {
+                    canvas.HideChoices();
+
+
+                    List<string> BST2P2diag2B = getStringList(levelTable["BST2P2"]["choicediag2B"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST2P2diag2B, MultiBoxes.DialogueBox));
+
+                    if (SpigaTimeBST2P2BPG4 == false)
+                    {
+                        SpigaGauge(1);
+                        SpigaTimeBST2P2BPG4 = true;
+                    }
+
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu2 = false;
+                    BSTMenu2B = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+            }
+
+
+            if (BSTMenu3 == true)
+            {
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
+
+                    List<string> BST3P1diag2A = getStringList(levelTable["BST3P1"]["choicediag2A"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST3P1diag2A, MultiBoxes.DialogueBox));
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu3 = false;
+                    BSTMenu3B = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 2)
+                {
+                    canvas.HideChoices();
+
+
+                    // PG4 P
+                    canvas.PG4Emoji(2);
+
+                    List<string> BST3P1diag2B = getStringList(levelTable["BST3P1"]["choicediag2B"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST3P1diag2B, MultiBoxes.DialogueBox));
+
+                    // PG4 N
+                    canvas.PG4Emoji(1);
+
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu3 = false;
+                    BSTMenu3B = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+            }
+
+            if (BSTMenu3B == true)
+            {
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
+
+                    List<string> BST3P2diag2A = getStringList(levelTable["BST3P2"]["choicediag2A"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST3P2diag2A, MultiBoxes.DialogueBox));
+
+                    if (SpigaTimeBST3P2APG4 == false)
+                    {
+                        SpigaGauge(1);
+                        SpigaTimeBST3P2APG4 = true;
+                    }
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu3 = false;
+                    BSTMenu3B = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 2)
+                {
+                    canvas.HideChoices();
+
+                    // PG4 P
+                    canvas.PG4Emoji(2);
+
+                    List<string> BST3P2diag2B = getStringList(levelTable["BST3P2"]["choicediag2B"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST3P2diag2B, MultiBoxes.DialogueBox));
+
+
+                    if (SpigaTimeBST3P2BPG4 == false)
+                    {
+                        SpigaGauge(1);
+                        SpigaTimeBST3P2BPG4 = true;
+                    }
+
+                    // PG4 N
+                    canvas.PG4Emoji(1);
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu3 = false;
+                    BSTMenu3B = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+            }
+
+            if (BSTMenu3C == true)
+            {
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
+
+                    List<string> BST3P3diag2A = getStringList(levelTable["BST3P3"]["choicediag2A"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST3P3diag2A, MultiBoxes.DialogueBox));
+
+                    if (SpigaTimeBST3P3BPG4 == false)
+                    {
+                        SpigaGauge(1);
+                        SpigaTimeBST3P3BPG4 = true;
+                    }
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu3 = false;
+                    BSTMenu3B = false;
+                    BSTMenu3C = false;
+                    canvas.Choices3();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 2)
+                {
+                    canvas.HideChoices();
+
+
+                    List<string> BST3P3diag2B = getStringList(levelTable["BST3P3"]["choicediag2B"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST3P3diag2B, MultiBoxes.DialogueBox));
+
+
+                    if (SpigaTimeBST3P3CPG4 == false)
+                    {
+                        SpigaGauge(1);
+                        SpigaTimeBST3P3CPG4 = true;
+                    }
+
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG4choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext"].ToString(), Boxes.Choice3);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu3 = false;
+                    BSTMenu3B = false;
+                    BSTMenu3C = false;
+                    canvas.Choices3();
                     pressedButton = 0;
                 }
             }
@@ -3691,6 +4499,466 @@ public class LevelManager : MonoBehaviour
     }
 
 
+    public IEnumerator dialogueP5Routine(string PGUnavail)
+    {
+
+        // Wait a frame to allow for initialization of other classes
+        yield return null;
+
+        actionInProgress = true;
+
+        if (progressHind5 == false)
+        {
+            BST1Phase = BST1Phase5;
+            BST2Phase = BST2Phase5;
+            BST3Phase = BST3Phase5;
+            BST4Phase = BST4Phase5;
+            progressHind5 = true;
+        }
+
+
+        // Change name of pg
+        string name = levelTable["name"].ToString();
+        canvas.printToTextBox(name, Boxes.Name);
+
+        // Se la fase corrente è quella in cui non ci sono:
+        if (Phase == PGUnavail)
+        {
+            List<string> introTextUNAVAIL = getStringList(levelTable["introUNAVAIL"]["introtext"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introTextUNAVAIL, MultiBoxes.DialogueBox));
+
+            actionInProgress = false;
+            canvas.EndDialogue();
+            yield return null;
+        }
+
+        if (PG5win)
+        {
+            List<string> introTextWIN = getStringList(levelTable["introUNAVAIL"]["introtextwin"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introTextWIN, MultiBoxes.DialogueBox));
+
+            actionInProgress = false;
+            canvas.EndDialogue();
+            yield return null;
+        }
+
+
+        // Generate and print intro text
+        if (firstTime5) // se è la prima volta
+        {
+            firstTime5 = false;
+            List<string> introFirstText = getStringList(levelTable["introFirst"]["introtext"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introFirstText, MultiBoxes.DialogueBox));
+        }
+        else // tutte le altre volte
+        {
+            List<string> introText = getStringList(levelTable["intro"]["introtext"].AsArray);
+            yield return StartCoroutine(canvas.printDialogue(introText, MultiBoxes.DialogueBox));
+        }
+
+        // mostra le prime scelte
+        canvas.ShowChoices();
+        canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+        canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+        canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG5choice2int].ToString(), Boxes.Choice2);
+        canvas.printToTextBox(levelTable["choice3"]["choicetext" + moneyInt].ToString(), Boxes.Choice3);
+        canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
+
+        while (true)
+        {
+            if (mainmenu == true) // MAIN MENU
+            {
+                if (pressedButton == 1)  // INVITO FESTA
+                {
+                    canvas.HideChoices();
+
+                    PG5win = true;
+
+                    SpigaGauge(5);
+
+                    // PG5 P
+                    canvas.PG5Emoji(2);
+
+                    List<string> choice1diagnew = getStringList(levelTable["choice1"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(choice1diagnew, MultiBoxes.DialogueBox));
+
+
+                    // PG5 N
+                    canvas.PG5Emoji(1);
+
+                    pressedButton = 0;
+
+                    mainmenu = true;
+                    canvas.AllChoices();
+                    actionInProgress = false;
+                    canvas.EndDialogue();
+                    yield return null;
+                }
+
+                if (pressedButton == 2) // BST
+                {
+                    canvas.HideChoices();
+
+                    List<string> choice2diag = getStringList(levelTable["choice2"]["choicediag" + PG5choice2int].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(choice2diag, MultiBoxes.DialogueBox));
+
+                    PG5choice2int = "new";
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortextBST"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["BST1P" + BST1Phase]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["BST2P" + BST2Phase]["choicetext"].ToString(), Boxes.Choice2);
+
+                    BSTMenu = true;
+                    mainmenu = false;
+                    canvas.Choices2();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 3) //ITEM OP
+                {
+                    canvas.HideChoices();
+
+                    if (moneyInt == "yes")
+                    {
+
+                        // PG5 P
+                        canvas.PG5Emoji(2);
+
+                        List<string> choice3diag = getStringList(levelTable["choice3"]["choicediag"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(choice3diag, MultiBoxes.DialogueBox));
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["ITEM1"]["choicetext"].ToString(), Boxes.Choice1);
+
+                        ItemMenu = true;
+                        mainmenu = false;
+                        canvas.Choices1();
+                        pressedButton = 0;
+                    }
+                    else
+                    {
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                        canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG5choice2int].ToString(), Boxes.Choice2);
+                        canvas.printToTextBox(levelTable["choice3"]["choicetext" + moneyInt].ToString(), Boxes.Choice3);
+                        canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
+
+                        mainmenu = true;
+                        canvas.AllChoices();
+                        pressedButton = 0;
+                    }
+
+                }
+                if (pressedButton == 4) //END
+                {
+                    canvas.HideChoices();
+
+                    List<string> choice4diag = getStringList(levelTable["choice4"]["choicediag"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(choice4diag, MultiBoxes.DialogueBox));
+
+                    pressedButton = 0;
+
+                    mainmenu = true;
+                    canvas.AllChoices();
+                    actionInProgress = false;
+                    canvas.EndDialogue();
+                    yield return null;
+
+                }
+
+            }
+
+            // BSTmenu
+            if (BSTMenu == true)
+            {
+                if (pressedButton == 1)
+                {
+                    if (BST1Phase == 1)
+					{
+                        canvas.HideChoices();
+
+
+                        List<string> BST1P1diag = getStringList(levelTable["BST1P1"]["choicediag"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(BST1P1diag, MultiBoxes.DialogueBox));
+
+                        PG5currentPhase1P1 = TimeScript.phaseNum;
+                        PG5currentDay1P1 = TimeScript.day;
+
+                        if (!PG5BST1P1done)
+                        {
+                            BST1Phase5++;
+                            PG5BST1P1done = true;
+                        }
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["BST1P1"]["choicetext2"].ToString(), Boxes.Choice1);
+
+                        mainmenu = false;
+                        BSTMenu = false;
+                        BSTMenu1 = true;
+                        canvas.Choices1();
+                        pressedButton = 0;
+
+                    }
+
+                    if (BST1Phase == 2 && (PG5currentPhase1P1 != TimeScript.phaseNum || PG5currentDay1P1 != TimeScript.day))
+                    {
+                        canvas.HideChoices();
+
+
+                        List<string> BST1P2diag = getStringList(levelTable["BST1P2"]["choicediag"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(BST1P2diag, MultiBoxes.DialogueBox));
+
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["BST1P2"]["choicetext2"].ToString(), Boxes.Choice1);
+
+                        mainmenu = false;
+                        BSTMenu = false;
+                        BSTMenu1 = false;
+                        BSTMenu1B = true;
+                        canvas.Choices1();
+                        pressedButton = 0;
+
+                    }
+                }
+
+                if (pressedButton == 2)
+                {
+                    if (BST2Phase == 1)
+                    {
+                        canvas.HideChoices();
+
+                        List<string> BST2P1diag = getStringList(levelTable["BST2P1"]["choicediag"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(BST2P1diag, MultiBoxes.DialogueBox));
+
+                        PG5currentPhase2P1 = TimeScript.phaseNum;
+                        PG5currentDay2P1 = TimeScript.day;
+
+                        if (!PG5BST2P1done)
+                        {
+                            BST2Phase5++;
+                            PG5BST2P1done = true;
+                        }
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortextEMPTY"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["BST2P1"]["choicetext2A"].ToString(), Boxes.Choice1);
+                        canvas.printToTextBox(levelTable["BST2P1"]["choicetext2B"].ToString(), Boxes.Choice2);
+
+                        mainmenu = false;
+                        BSTMenu = false;
+                        BSTMenu1 = false;
+                        BSTMenu2 = true;
+                        canvas.Choices2();
+                        pressedButton = 0;
+                    }
+
+                    if (BST2Phase == 2 && (PG5currentPhase2P1 != TimeScript.phaseNum || PG5currentDay2P1 != TimeScript.day))
+                    {
+                        canvas.HideChoices();
+
+
+                        // PG5 P
+                        canvas.PG5Emoji(2);
+
+                        List<string> BST2P2diag = getStringList(levelTable["BST2P2"]["choicediag"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(BST2P2diag, MultiBoxes.DialogueBox));
+
+
+                        if (SpigaTimeBST1P2APG5 == false)
+                        {
+                            SpigaGauge(-1);
+                            SpigaTimeBST1P2APG5 = true;
+                        }
+
+                        // PG5 N
+                        canvas.PG5Emoji(1);
+
+                        canvas.ShowChoices();
+                        canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                        canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                        canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG5choice2int].ToString(), Boxes.Choice2);
+                        canvas.printToTextBox(levelTable["choice3"]["choicetext" + toothInt].ToString(), Boxes.Choice3);
+                        canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
+
+                        mainmenu = true;
+                        BSTMenu = false;
+                        BSTMenu1 = false;
+                        BSTMenu1B = false;
+                        BSTMenu2 = false;
+                        canvas.AllChoices();
+                        pressedButton = 0;
+                    }
+                }
+            }
+
+            if (BSTMenu1 == true)
+            {
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
+
+
+                    // PG5 N
+                    canvas.PG5Emoji(2);
+
+                    List<string> BST1P1diag2 = getStringList(levelTable["BST1P1"]["choicediag2"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST1P1diag2, MultiBoxes.DialogueBox));
+
+                    // PG5 N
+                    canvas.PG5Emoji(1);
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG5choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + moneyInt].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu1 = false;
+                    canvas.AllChoices();
+                    pressedButton = 0;
+                }
+
+
+            }
+            if (BSTMenu1B == true)
+            {
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
+
+                    List<string> BST1P2diag2 = getStringList(levelTable["BST1P2"]["choicediag2"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST1P2diag2, MultiBoxes.DialogueBox));
+
+                    if (SpigaTimeBST1P1APG5 == false)
+                    {
+                        SpigaGauge(1);
+                        SpigaTimeBST1P1APG5 = true;
+                    }
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG5choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + moneyInt].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu1 = false;
+                    BSTMenu1B = false;
+                    canvas.AllChoices();
+                    pressedButton = 0;
+                }
+
+
+            }
+
+
+            if (BSTMenu2 == true)
+            {
+                if (pressedButton == 1)
+                {
+                    canvas.HideChoices();
+
+
+                    List<string> BST2P1diag2A = getStringList(levelTable["BST2P1"]["choicediag2A"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST2P1diag2A, MultiBoxes.DialogueBox));
+
+                    if (SpigaTimeBST2P1APG5 == false)
+                    {
+                        SpigaGauge(1);
+                        SpigaTimeBST2P1APG5 = true;
+                    }
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG5choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + moneyInt].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu2 = false;
+                    canvas.AllChoices();
+                    pressedButton = 0;
+                }
+
+                if (pressedButton == 2)
+                {
+                    canvas.HideChoices();
+
+                    List<string> BST2P1diag2B = getStringList(levelTable["BST2P1"]["choicediag2B"].AsArray);
+                    yield return StartCoroutine(canvas.printDialogue(BST2P1diag2B, MultiBoxes.DialogueBox));
+
+                    if (SpigaTimeBST2P1BPG5 == false)
+                    {
+                        SpigaGauge(1);
+                        SpigaTimeBST2P1BPG5 = true;
+                    }
+
+                    canvas.ShowChoices();
+                    canvas.printToTextBox(levelTable["intro"]["flavortext"].ToString(), Boxes.DialogueBox);
+                    canvas.printToTextBox(levelTable["choice1"]["choicetext"].ToString(), Boxes.Choice1);
+                    canvas.printToTextBox(levelTable["choice2"]["choicetext" + PG5choice2int].ToString(), Boxes.Choice2);
+                    canvas.printToTextBox(levelTable["choice3"]["choicetext" + moneyInt].ToString(), Boxes.Choice3);
+                    canvas.printToTextBox(levelTable["choice4"]["choicetext"].ToString(), Boxes.Choice4);
+
+                    mainmenu = true;
+                    BSTMenu = false;
+                    BSTMenu2 = false;
+                    canvas.AllChoices();
+                    pressedButton = 0;
+                }
+            }
+
+
+            if (ItemMenu == true)
+			{
+                if (pressedButton == 1)
+                {
+                    if (pressedButton == 1)
+                    {
+                        canvas.HideChoices();
+
+                        // PG5 N
+                        canvas.PG5Emoji(1);
+
+                        List<string> BST1P1diag2 = getStringList(levelTable["BST1P1"]["choicediag2"].AsArray);
+                        yield return StartCoroutine(canvas.printDialogue(BST1P1diag2, MultiBoxes.DialogueBox));
+
+
+
+                        PG5win = true;
+
+                        pressedButton = 0;
+                        mainmenu = true;
+                        ItemMenu = false;
+                        canvas.AllChoices();
+                        actionInProgress = false;
+                        canvas.EndDialogue();
+                        yield return null;
+                    }
+
+                }
+
+            }
+
+            yield return null;
+        }
+
+
+    }
 
 
 
