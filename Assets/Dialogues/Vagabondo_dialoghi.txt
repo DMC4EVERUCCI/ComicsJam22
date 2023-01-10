@@ -83,7 +83,7 @@ choicediag = ["Yeah... and they're all dicks."]
 choicetext2A = "You are brave for following your dad." #POSITIVO 
 choicediag2A = ["Thanks...", "Everybody treats me like garbage...", "'Bernardino do this...'","'Bernardino you're unable to do anything'", "'Bernardino you are rude and immoral'","But y'know...", "At the end I was the only one whom proposed himself to help dad", "I...I..","I just want to be closer to him.", "And if that means getting closer to God or something, so be it"]
 choicetext2B = "Maybe one of your brothers should have replaced you for this." #NEGATIVO #figlio arrabbiato, padre felice
-choicediag2b = ["Oh, shut up!","They got nothing that I don't."]
+choicediag2B = ["Oh, shut up!","They got nothing that I don't."]
 
 ### ALBERO 3
 

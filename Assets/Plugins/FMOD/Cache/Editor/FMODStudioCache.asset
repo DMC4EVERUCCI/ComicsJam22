@@ -152,7 +152,7 @@ MonoBehaviour:
   Path: Assets/Sounds/FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638088268683888087
+  lastModified: 638088974583689557
   FileSizes:
   - Name: 
     Value: 1424
@@ -180,7 +180,7 @@ MonoBehaviour:
   - {fileID: 7703340652471245694}
   StringsBanks:
   - {fileID: -1997440188584086256}
-  cacheTime: 638088268683888087
+  cacheTime: 638088974583689557
   cacheVersion: 131591
 --- !u!114 &2650366517923008671
 MonoBehaviour:
@@ -250,13 +250,13 @@ MonoBehaviour:
     Data4: 1093522595
   Banks:
   - {fileID: 7703340652471245694}
-  IsStream: 0
+  IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 33048
 --- !u!114 &5895663144830748612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,7 +368,7 @@ MonoBehaviour:
   Path: Assets/Sounds/FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638088268683848082
+  lastModified: 638088974583653569
   FileSizes: []
   Exists: 1
 --- !u!114 &8395825670390292115

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using FMODUnity;
+using UnityEngine.SceneManagement;
 
 public class CanvasController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class CanvasController : MonoBehaviour
     GameObject TimeManager;
     GameObject LevelManager;
     SpigaManager SpigaManager;
+
+    bool firstBoot;
 
     SpriteRenderer Mappa;
     SpriteRenderer BGRPG1;
@@ -60,6 +63,7 @@ public class CanvasController : MonoBehaviour
     [SerializeField] SpriteRenderer PG5P;
     [SerializeField] SpriteRenderer PG5absent;
 
+    [SerializeField] GameObject ICONS;
     [SerializeField] SpriteRenderer MapIcon1;
     [SerializeField] SpriteRenderer MapIcon2;
     [SerializeField] SpriteRenderer MapIcon3;
@@ -91,6 +95,10 @@ public class CanvasController : MonoBehaviour
     bool timeToTime;
     bool firstDiag;
 
+
+    [SerializeField] GameObject LEADERPG;
+    [SerializeField] GameObject LEADERBGR;
+    [SerializeField] TextMeshProUGUI DAY;
 
 
     // You have to press space to advance through dialogue in these
@@ -146,22 +154,51 @@ public class CanvasController : MonoBehaviour
 
         firstDiag = true;
 
-        BGRPG1 = GameObject.Find("BGRPG1").GetComponent<SpriteRenderer>();
-        BGRPG2 = GameObject.Find("BGRPG2").GetComponent<SpriteRenderer>();
-        BGRPG3 = GameObject.Find("BGRPG3").GetComponent<SpriteRenderer>();
-        BGRPG4 = GameObject.Find("BGRPG4").GetComponent<SpriteRenderer>();
-        BGRPG5 = GameObject.Find("BGRPG5").GetComponent<SpriteRenderer>();
-
         Phase = "NOTTE";
+
+        BGRPG1 = GameObject.Find("BGRPG1" + Phase).GetComponent<SpriteRenderer>();
+        BGRPG2 = GameObject.Find("BGRPG2" + Phase).GetComponent<SpriteRenderer>();
+        BGRPG3 = GameObject.Find("BGRPG3" + Phase).GetComponent<SpriteRenderer>();
+        BGRPG4 = GameObject.Find("BGRPG4" + Phase).GetComponent<SpriteRenderer>();
+        BGRPG5 = GameObject.Find("BGRPG5" + Phase).GetComponent<SpriteRenderer>();
         Mappa = GameObject.Find("MAPPA" + Phase).GetComponent<SpriteRenderer>();
-        ShowMap();
     }
 
-    // Update is called once per frame
-    void Update()
+	void PhaseCheckBGR()
+	{
+
+        DAY.text = "Day " + TimeManager.GetComponent<TimeScript>().day;
+
+        if (TimeManager.GetComponent<TimeScript>().day > 3)
+		{
+            EndingTime(TimeManager.GetComponent<TimeScript>().currentWins);
+        }
+
+        BGRPG1 = GameObject.Find("BGRPG1" + Phase).GetComponent<SpriteRenderer>();
+        BGRPG2 = GameObject.Find("BGRPG2" + Phase).GetComponent<SpriteRenderer>();
+        BGRPG3 = GameObject.Find("BGRPG3" + Phase).GetComponent<SpriteRenderer>();
+        BGRPG4 = GameObject.Find("BGRPG4" + Phase).GetComponent<SpriteRenderer>();
+        BGRPG5 = GameObject.Find("BGRPG5" + Phase).GetComponent<SpriteRenderer>();
+    }
+
+
+
+	// Update is called once per frame
+	void Update()
     {
 
-        
+        if (firstBoot == false)
+        {
+
+            PG1Container.SetActive(false);
+            PG2Container.SetActive(false);
+            PG3Container.SetActive(false);
+            PG4Container.SetActive(false);
+            PG5Container.SetActive(false);
+            ICONS.SetActive(false);
+
+            firstBoot = true;
+        }
 
         if (TimeManager.GetComponent<TimeScript>().mattina == true)
         {
@@ -182,13 +219,10 @@ public class CanvasController : MonoBehaviour
 
 
         Mappa = GameObject.Find("MAPPA"+Phase).GetComponent<SpriteRenderer>();
-        BGRPG1 = GameObject.Find("BGRPG1").GetComponent<SpriteRenderer>();
-        BGRPG2 = GameObject.Find("BGRPG2").GetComponent<SpriteRenderer>();
-        BGRPG3 = GameObject.Find("BGRPG3").GetComponent<SpriteRenderer>();
-        BGRPG4 = GameObject.Find("BGRPG4").GetComponent<SpriteRenderer>();
-        BGRPG5 = GameObject.Find("BGRPG5").GetComponent<SpriteRenderer>();
 
     }
+
+
 
 
     public void HideAll()
@@ -209,9 +243,19 @@ public class CanvasController : MonoBehaviour
         EscIcon.enabled = false;
     }
 
+    public void IntroEnd()
+    {
+        LEADERPG.SetActive(false);
+        LEADERBGR.SetActive(false);
+        DAY.enabled = true;
+
+        ICONS.SetActive(true);
+    }
+
     public void ShowMap()
     {
         TimeManager.GetComponent<TimeScript>().WheelUpdate();
+
 
         OST.SetParameter("MenuDrums", 100f);
 
@@ -276,6 +320,8 @@ public class CanvasController : MonoBehaviour
         PG4Container.SetActive(false);
         PG5Container.SetActive(false);
 
+        PhaseCheckBGR();
+
         Mappa.enabled = false;
         BGRPG1.enabled = true;
         BGRPG2.enabled = false;
@@ -317,6 +363,8 @@ public class CanvasController : MonoBehaviour
         PG4Container.SetActive(false);
         PG5Container.SetActive(false);
 
+        PhaseCheckBGR();
+
         Mappa.enabled = false;
         BGRPG1.enabled = false;
         BGRPG2.enabled = true;
@@ -357,6 +405,8 @@ public class CanvasController : MonoBehaviour
         PG3Container.SetActive(true);
         PG4Container.SetActive(false);
         PG5Container.SetActive(false);
+
+        PhaseCheckBGR();
 
         Mappa.enabled = false;
         BGRPG1.enabled = false;
@@ -400,6 +450,8 @@ public class CanvasController : MonoBehaviour
         PG4Container.SetActive(true);
         PG5Container.SetActive(false);
 
+        PhaseCheckBGR();
+
         Mappa.enabled = false;
         BGRPG1.enabled = false;
         BGRPG2.enabled = false;
@@ -441,6 +493,8 @@ public class CanvasController : MonoBehaviour
         PG3Container.SetActive(false);
         PG4Container.SetActive(false);
         PG5Container.SetActive(true);
+
+        PhaseCheckBGR();
 
         Mappa.enabled = false;
         BGRPG1.enabled = false;
@@ -573,8 +627,12 @@ public class CanvasController : MonoBehaviour
                 break;
         }
     }
+    public void EndingTime(int i)
+    {
+        OST.Stop();
 
-
+        SceneManager.LoadScene(2);
+    }
 
     public void ShowChoices()
 	{
@@ -635,6 +693,11 @@ public class CanvasController : MonoBehaviour
         }
 
         currentPG = i;
+
+        if (i == 6)
+		{
+            OST.SetParameter("LeaderDrums", 100f);
+		}
 
 	}
 

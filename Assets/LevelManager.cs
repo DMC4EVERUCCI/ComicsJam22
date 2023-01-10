@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public TextAsset levelSource3;
     public TextAsset levelSource4;
     public TextAsset levelSource5;
+    public TextAsset levelSource6;
     private TomlTable levelTable;
 
     private SpigaManager SpigaManager;
@@ -406,6 +407,7 @@ public class LevelManager : MonoBehaviour
             ItemHandler(4);
         }
 
+
     }
 
     public void ItemHandler(int i)
@@ -502,6 +504,7 @@ public class LevelManager : MonoBehaviour
         string PGUnavail;
         switch (i)
         {
+            
             case 1:
                 // File reading works correctly
                 string fileContents = levelSource.ToString();
@@ -562,7 +565,42 @@ public class LevelManager : MonoBehaviour
 
                 StartCoroutine(dialogueP5Routine(PGUnavail));
                 break;
+            case 6:
+                // File reading works correctly
+                fileContents = levelSource6.ToString();
+                //Debug.Log(fileContents);
+
+                // TOML table translation
+                levelTable = TOML.Parse(new StringReader(fileContents));
+
+                PGUnavail = "";
+
+                StartCoroutine(dialogueP6Routine(PGUnavail));
+                break;
         }
+
+    }
+
+    public IEnumerator dialogueP6Routine(string PGUnavail)
+	{
+        yield return null;
+
+        actionInProgress = true;
+
+        // Change name of pg
+        string name = levelTable["name"].ToString();
+        canvas.printToTextBox(name, Boxes.Name);
+
+        List<string> tutorialdiag = getStringList(levelTable["tutorial"]["choicediag"].AsArray);
+        yield return StartCoroutine(canvas.printDialogue(tutorialdiag, MultiBoxes.DialogueBox));
+
+
+        actionInProgress = false;
+        canvas.IntroEnd();
+        canvas.ShowMap();
+        canvas.EndDialogue();
+        yield return null;
+
 
     }
 
@@ -1725,6 +1763,7 @@ public class LevelManager : MonoBehaviour
                     canvas.PG1Emoji(1);
 
                     PG1win = true;
+                    TimeScript.WinGain(1);
                     
                     pressedButton = 0;
                     mainmenu = true;
@@ -3156,15 +3195,6 @@ public class LevelManager : MonoBehaviour
 
                         List<string> BST2P2diag = getStringList(levelTable["BST2P2"]["choicediag"].AsArray);
                         yield return StartCoroutine(canvas.printDialogue(BST2P2diag, MultiBoxes.DialogueBox));
-
-                        PG3currentPhase2P2 = TimeScript.phaseNum;
-                        PG3currentDay2P2 = TimeScript.day;
-
-                        if (!PG3BST2P2done)
-                        {
-                            BST2Phase3++;
-                            PG3BST2P2done = true;
-                        }
 
 
                         canvas.ShowChoices();
@@ -4934,7 +4964,7 @@ public class LevelManager : MonoBehaviour
                         // PG5 N
                         canvas.PG5Emoji(1);
 
-                        List<string> BST1P1diag2 = getStringList(levelTable["BST1P1"]["choicediag2"].AsArray);
+                        List<string> BST1P1diag2 = getStringList(levelTable["ITEM1"]["choicediag"].AsArray);
                         yield return StartCoroutine(canvas.printDialogue(BST1P1diag2, MultiBoxes.DialogueBox));
 
 

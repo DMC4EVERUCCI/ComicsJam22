@@ -9,6 +9,9 @@ public class TimeScript : MonoBehaviour
     public bool sera;
     public bool notte;
 
+    public int currentWins;
+
+    [SerializeField] CanvasController canvas;
     [SerializeField] SpriteRenderer mattinaIcon;
     [SerializeField] SpriteRenderer pomeIcon;
     [SerializeField] SpriteRenderer seraIcon;
@@ -16,7 +19,7 @@ public class TimeScript : MonoBehaviour
 
     public int phaseNum;
 
-    public int day;
+    public int day = 1;
 
     LevelManager LevelManager;
 
@@ -26,13 +29,21 @@ public class TimeScript : MonoBehaviour
         NotteTime();
 
         LevelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+
+        day = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+     
     }
+
+    public void WinGain(int i)
+	{
+        currentWins += i;
+	}
+
 
     public void AdvanceTime(int number)
 	{
