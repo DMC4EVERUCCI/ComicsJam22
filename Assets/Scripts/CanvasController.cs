@@ -631,7 +631,7 @@ public class CanvasController : MonoBehaviour
     {
         OST.Stop();
 
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     public void ShowChoices()

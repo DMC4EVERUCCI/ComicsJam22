@@ -24,7 +24,7 @@ public class StartScript : MonoBehaviour
     public void PressStart()
 	{
         OST.Stop();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
 	}
 
 }

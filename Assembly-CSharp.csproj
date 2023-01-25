@@ -64,6 +64,7 @@
     <Compile Include="Assets\LevelManager.cs" />
     <Compile Include="Assets\Tommy.cs" />
     <Compile Include="Assets\Scripts\Clickable.cs" />
+    <Compile Include="Assets\Scripts\Loading.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
