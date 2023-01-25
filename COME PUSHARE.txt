@@ -1,0 +1,12 @@
+PER PULLARE:
+cd cartella in cui è
+git pull
+
+per PUSHARE
+git add .
+git commit -m "commento"
+git push
+
+per PULLARE quando hai cose che ti sovrascrivono e che non ti interessa perdere
+git stash
+git pull
